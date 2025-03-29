@@ -1,0 +1,187 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+  }
+
+  @font-face {
+    font-family: 'HombreBoldItalic';
+    src: url('assets/fonts/Hombre Italic.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'HombreBold';
+    src: url('assets/fonts/Hombre Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'HombreItalic';
+    src: url('assets/fonts/Hombre Italic.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'HombreRegular';
+    src: url('assets/fonts/Hombre Regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @keyframes textColorTransition {
+    0% {
+      color: black;  /* Початковий колір (змініть, якщо потрібно) */
+    }
+    50% {
+      color: white;  /* Білий колір в середині анімації */
+    }
+    100% {
+      color: black;  /* Повернення до початкового кольору */
+    }
+  }
+  
+  .name-main {
+    text-align: center;
+    font-size: 90px;
+    margin-bottom: 0;
+    margin-top: 0.5em;
+    font-family: 'HombreRegular';
+    animation: textColorTransition 6s infinite; /* 3 секунди на цикл, нескінченно */
+  }
+  
+  .subname-main {
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    font-family: 'HombreBold';
+    animation: textColorTransition 6s infinite;
+  }
+
+/* Анімація фону */
+@keyframes bgColorTransition {
+  0% {
+    background-color: #FF4000;
+    opacity: 0.2;
+  }
+  20% {
+    background-color: #FFFF00;
+    opacity: 0.2;
+  }
+  40% {
+    background-color: #01DF01;
+    opacity: 0.2;
+  }
+  60% {
+    background-color: #01DFD7;
+    opacity: 0.2;
+  }
+  80% {
+    background-color: #0101DF;
+    opacity: 0.2;
+  }
+  100% {
+    background-color: #FF4000;
+    opacity: 0.2;
+  }
+}
+
+/* Стилі для навігації */
+.top-nav {
+  width: 100%;
+  position: relative; /* змінено з absolute на relative для роботи псевдоелемента */
+  /* Якщо потрібне позиціювання, можна використати абсолютне позиціювання для самої навігації, 
+     але тоді псевдоелемент треба адаптувати */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* вміст навігації буде мати високий z-index */
+  font-family: 'HombreRegular';
+  /* Видаляємо background-color та анімацію із самого контейнера */
+}
+
+/* Псевдоелемент для фонового анімаційного шару */
+.top-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* розміщуємо позаду вмісту */
+  animation: bgColorTransition 20s infinite;
+}
+
+/* Решта стилів */
+.top-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 15px 0;
+}
+
+.top-nav li {
+  margin: 0;
+  z-index: 1000;
+}
+
+.top-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 30px;
+  transition: color 0.3s ease;
+}
+
+.top-nav a:hover {
+  color: white;
+}
+  .text-center{
+    text-align: center;
+  }
+
+  .page-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Щоб завжди була висота */
+    z-index: 1;
+}
+
+.background-container {
+  position: fixed; /* або absolute, якщо потрібно */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -2; /* розташовується позаду контенту */
+  transition: background-image 0.5s ease; /* для плавної зміни, якщо потрібно */
+}
+.main {
+  background-image: url("assets/image/background.jpg");
+}
+
+.register {
+  background-image: url("assets/image/background-register.jpg");
+}
+
+.cabinet {
+  background-image: url("assets/image/background-cabinet.jpg");
+}
+.files {
+  background-image: url("assets/image/background-files.jpg");
+}
+
+.lang-ru{
+  background-image: url("assets/image/lang_ru.png");
+}
+.lang-en{
+  background-image: url("assets/image/lang_en.png");
+}
+.lang-ua{
+  background-image: url("assets/image/lang_ua.png"); 
+}

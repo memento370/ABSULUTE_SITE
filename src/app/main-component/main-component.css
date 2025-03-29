@@ -1,0 +1,13 @@
+.info-area {
+  width: 500px;         /* Збільшена ширина */
+  margin: 20px auto;     /* Центрування по горизонталі */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}

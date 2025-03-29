@@ -1,0 +1,42 @@
+
+  .language-panel {
+    z-index: 100;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: height 0.3s ease; /* Анімація для плавного згортання */
+    height: 130px; /* Висота в розгорнутому стані (3 кнопки по 40px + 2 gaps по 5px) */
+  
+    &.collapsed {
+      height: 40px; /* Висота в згорнутому стані (1 кнопка) */
+    }
+  }
+  
+  .lang-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+    background-size: cover; /* Зображення повністю вміщається в кнопку */
+    background-position: center; /* Центруємо зображення */
+    background-repeat: no-repeat; /* Без повторення */
+  
+    &:hover {
+      background-color: #bbb;
+    }
+  
+    &:active {
+      background-color: #999;
+    }
+  }
+ 

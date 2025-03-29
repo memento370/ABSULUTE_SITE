@@ -1,0 +1,43 @@
+<div>
+  <h1 class="name-main">L2 Absolute</h1>
+  <h4 class="subname-main">{{ 'title' | translate }}</h4>
+</div>
+<div class="registration-form" *ngIf="!autentification">
+  <form>
+    <div class="form-group">
+      <label for="username">{{ 'cabinet_login_1' | translate }}</label>
+      <input type="text" id="username" [(ngModel)]="login" name="login" required class="form-control" placeholder="{{ 'cabinet_login_2' | translate }}">
+    </div>
+    <div class="form-group">
+      <label for="password">{{ 'cabinet_pass_1' | translate }}</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required class="form-control" placeholder="{{ 'cabinet_pass_2' | translate }}">
+    </div>
+    <button type="button" class="btn" (click)="onSubmit()">{{ 'cabinet_enter' | translate }}</button>
+  </form>
+</div>
+<div class="registration-form" *ngIf="autentification">
+  <form>
+    <div class="form-group" *ngIf="selectedCharacter">
+      <label for="characterSelect">{{ 'cabinet_hero' | translate }}</label>
+      <select id="characterSelect"
+              class="form-control"
+              [(ngModel)]="selectedCharacter"
+              name="characterSelect">
+        <option *ngFor="let character of characters" [ngValue]="character">
+          {{ character.charName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="!selectedCharacter">
+      <h4>{{ 'cabinet_hero_null' | translate }}</h4>
+    </div>
+  </form>
+  
+  <div class="character-details" *ngIf="selectedCharacter">
+    <p>{{ 'cabinet_rase' | translate }} : {{ selectedCharacter.raceRu }}</p>
+    <p>{{ 'cabinet_lvl' | translate }} : {{ selectedCharacter.lvl }}</p>
+    <p>{{ 'cabinet_class' | translate }} : {{ selectedCharacter.classRu }}</p>
+  </div>
+
+  <button class="btn" (click)="logout()">Выход</button>
+</div>

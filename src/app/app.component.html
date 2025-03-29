@@ -1,0 +1,39 @@
+<div class="background-container" [ngClass]="currentBackground"></div>
+<nav class="top-nav">
+    <ul>
+      <li><a routerLink="/">{{ 'nav_main' | translate }}</a></li>
+      <li><a routerLink="/register">{{ 'nav_reg' | translate }}</a></li>
+      <li><a routerLink="/files">{{ 'nav_files' | translate }}</a></li>
+      <li><a routerLink="/info">{{ 'nav_about' | translate }}</a></li>
+      <li><a routerLink="/database">{{ 'nav_base' | translate }}</a></li>
+      <li><a routerLink="/cabinet">{{ 'nav_cabinet' | translate }}</a></li>
+    </ul>
+</nav>
+<div class="language-panel" [class.collapsed]="isCollapsed">
+  <ng-container *ngIf="isCollapsed; else expandedView">
+    <button
+      class="lang-btn"
+      [ngClass]="{
+        'lang-ua': selectedLanguage === 'uk',
+        'lang-en': selectedLanguage === 'en',
+        'lang-ru': selectedLanguage === 'ru'
+      }"
+      (click)="togglePanel()"
+    ></button>
+  </ng-container>
+
+  <ng-template #expandedView>
+    <button class="lang-btn lang-ua" (click)="switchLanguage('uk')"></button>
+    <button class="lang-btn lang-en" (click)="switchLanguage('en')"></button>
+    <button class="lang-btn lang-ru" (click)="switchLanguage('ru')"></button>
+  </ng-template>
+</div>
+<div class="page-container">
+    <router-outlet></router-outlet>
+</div>
+<!-- Решта вашої розмітки -->
+<div style="display: none;">
+  <img src="assets/image/background.jpg" alt="preload background" />
+  <img src="assets/image/background-register.jpg" alt="preload background register" />
+  <img src="assets/image/background-cabinet.jpg" alt="preload background cabinet" />
+</div>

@@ -1,0 +1,45 @@
+<div>
+  <h1 class="name-main">L2 Absolute</h1>
+  <h4 class="subname-main">{{ 'title' | translate }}</h4>
+</div>
+<div class="registration-form">
+  <form *ngIf="!isCodeSent">
+    <div class="form-group">
+      <label for="email">{{ 'register_email_1' | translate }}</label>
+      <input type="email" id="email" [(ngModel)]="l2email" name="l2email" required class="form-control" placeholder="{{ 'register_email_2' | translate }}">
+    </div>
+    <div class="form-group">
+      <label for="username">{{ 'register_login_1' | translate }}</label>
+      <input type="text" id="username" [(ngModel)]="login" name="login" required class="form-control" placeholder="{{ 'register_login_2' | translate }}">
+    </div>
+    <div class="form-group">
+      <label for="password">{{ 'register_pass_1' | translate }}</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required class="form-control" placeholder="{{ 'register_pass_2' | translate }}">
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">{{ 'register_pass_confirm_1' | translate }}</label>
+      <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required class="form-control" placeholder="{{ 'register_pass_confirm_2' | translate }}">
+    </div>
+    <button type="button" class="btn" (click)="sendVerificationCode()">{{ 'register_send_code' | translate }}</button>
+  </form>
+  <div *ngIf="isCodeSent&&!registerSuccess">
+    <div class="form-group">
+      <label for="verificationCode">{{ 'register_verification_code' | translate }}</label>
+      <input type="text" id="verificationCode" class="form-control" [(ngModel)]="verificationCode" name="verificationCode" required>
+    </div>
+    <button type="button" class="btn" (click)="verifyCode()">{{ 'register_verification_code_send' | translate }}</button>
+  </div>
+  <div *ngIf="registerSuccess" class="text-center">
+      <h3>{{ 'register_succes_text_1' | translate }}</h3><br>
+      <h4>{{ 'register_succes_text_2' | translate }}</h4><br>
+      <h6>{{ 'register_succes_text_3' | translate }}</h6><br>
+      <div class="form-group">
+          <h6>{{ 'register_succes_login' | translate }} : {{login}}</h6>
+          <h6>{{ 'register_succes_pass' | translate }} : {{password}}</h6>    
+      </div>
+      <h4>{{ 'register_succes_text_4' | translate }}</h4>
+
+
+  </div>
+</div>
+

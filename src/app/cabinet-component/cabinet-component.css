@@ -1,0 +1,69 @@
+.registration-form {
+    width: 300px;
+    margin: 10em auto;
+    margin-top: 0em;
+    background: rgba(0, 0, 0, 0.5); /* Чорний колір із прозорістю 80% */
+    padding: 20px;
+    border-radius: 10px; /* Закруглені кути */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Тінь */
+    color: #fff; /* Білий текст */
+    font-family: Arial, sans-serif; /* Шрифт */
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Відступ між групами елементів */
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #fff; /* Білий текст */
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Напівпрозорі межі */
+    background: rgba(255, 255, 255, 0.1); /* Легкий прозорий фон */
+    color: #fff; /* Білий текст */
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff; /* Синій колір при фокусі */
+    outline: none;
+    background: rgba(255, 255, 255, 0.2); /* Трохи яскравіший фон при фокусі */
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff; /* Білий текст */
+    background-color: #007bff; /* Синя кнопка */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Плавний ефект */
+  }
+  
+  .btn:hover {
+    background-color: #0056b3; /* Темно-синій колір при наведенні */
+  }
+  
+  .btn:active {
+    background-color: #004080; /* Темніший колір при натисканні */
+  }
+  select.form-control {
+    color: white;           /* Чорний текст */
+  }
+  
+  /* Задаємо для пунктів списку (option) чорний текст */
+  select.form-control option {
+    color: #000;           /* Чорний текст */
+    background-color: #fff; /* Білий фон */
+  }
+  
