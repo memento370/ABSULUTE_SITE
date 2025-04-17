@@ -17,7 +17,7 @@
 </div>
 <div class="registration-form" *ngIf="autentification">
   <form>
-    <div class="form-group" *ngIf="selectedCharacter">
+    <div class="form-group" *ngIf="characters">
       <label for="characterSelect">{{ 'cabinet_hero' | translate }}</label>
       <select id="characterSelect"
               class="form-control"
@@ -28,7 +28,7 @@
         </option>
       </select>
     </div>
-    <div class="form-group" *ngIf="!selectedCharacter">
+    <div class="form-group" *ngIf="!characters">
       <h4>{{ 'cabinet_hero_null' | translate }}</h4>
     </div>
   </form>
