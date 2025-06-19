@@ -6,6 +6,8 @@
     "nav_about": "About the Game",
     "nav_base": "Knowledge Base",
     "nav_cabinet": "Cabinet",
+    "nav_forum":"Forum",
+
     "welcome_info_1": "Dear visitors!",
     "welcome_info_2": "The server is currently in its early stages of development. At this point, the website, sections 'About the Game' and 'Knowledge Base' are being worked on, but the forum is the top priority.",
     "welcome_info_3": "In the 'Files' section, a patched client and an updater are already available. You can log into the server now, but it’s not fully configured yet, and there may be delays since the current host is somewhat weak.",
