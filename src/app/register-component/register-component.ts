@@ -30,13 +30,13 @@ export class RegisterComponent {
           login: this.login,
           password: this.password,
         };
-        this.http.post('http://l2-absolute.com/api/site/accounts/register', account, { responseType: 'text' })
+        this.http.post('https://l2-absolute.com/api/site/accounts/register', account, { responseType: 'text' })
         .pipe(
           concatMap((response1: string) => {
             // Робимо паузу 1 секунду
             return timer(1000).pipe(
               // Після паузи виконуємо другий запит
-              mergeMap(() => this.http.post('http://l2-absolute.com/api/server/accounts/register', account, { responseType: 'text' }))
+              mergeMap(() => this.http.post('https://l2-absolute.com/api/server/accounts/register', account, { responseType: 'text' }))
             );
           })
         )
@@ -67,10 +67,10 @@ export class RegisterComponent {
                 login: this.login,
                 password: this.password
             };
-            this.http.post('http://l2-absolute.com/api/site/accounts/check-register', account, { responseType: 'text' })
+            this.http.post('https://l2-absolute.com/api/site/accounts/check-register', account, { responseType: 'text' })
                 .pipe(
                     switchMap(() =>
-                        this.http.post('http://l2-absolute.com/api/site/accounts/send-verification',{email: this.l2email},{ responseType: 'text' })
+                        this.http.post('https://l2-absolute.com/api/site/accounts/send-verification',{email: this.l2email},{ responseType: 'text' })
                     )
                 )
                 .subscribe({
@@ -86,7 +86,7 @@ export class RegisterComponent {
         }
         verifyCode() {
             this.http
-            .post('http://l2-absolute.com/api/site/accounts/verify-code', {
+            .post('https://l2-absolute.com/api/site/accounts/verify-code', {
                 email: this.l2email,
                 code: this.verificationCode,
             },{ responseType: 'text' })

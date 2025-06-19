@@ -73,7 +73,7 @@ export class CabinetComponent {
         password: this.password
       };
     
-      this.http.post<LoginResponse>('http://l2-absolute.com/api/site/accounts/login', account)
+      this.http.post<LoginResponse>('https://l2-absolute.com/api/site/accounts/login', account)
         .subscribe({
           next: (res: LoginResponse) => {
             this.toastr.success(res.message, "Успех");
@@ -97,7 +97,7 @@ export class CabinetComponent {
     onGetCharacters(): void {
       const token = localStorage.getItem('token');
       this.http.post<CharacterDTO[]>(
-        'http://l2-absolute.com/api/server/accounts/characters',
+        'https://l2-absolute.com/api/server/accounts/characters',
         this.loginAut,
         {     headers: { 
           'Content-Type': 'text/plain',
