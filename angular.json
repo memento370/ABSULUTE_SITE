@@ -54,7 +54,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/site/"
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
