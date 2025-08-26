@@ -34,8 +34,8 @@
     "files_client": "Patched client",
     "files_updater": "Updater",
     "files_link": "Link",
-    "files_text_1": "It is recommended to disable your PC’s antivirus, Windows Defender, and Windows Firewall, as they may block some client files and especially the updater, treating them as viruses. If you’ve downloaded the client or updater and they were blocked by antivirus, you should retrieve them from quarantine and create an exception. Also, keep in mind that antivirus or firewall may block files during the download process, resulting in corrupted files in the archive. In case of strange client behavior, it’s recommended to re-download the client or updater.",
-    "files_text_2": "Also, the updater may show an 'Error unpacking updater.exe' message. At this stage, it’s not a big deal and doesn’t affect anything; the latest game client will still be downloaded to the updater’s folder.",
+    "files_text_1": "After downloading the clean client, be sure to download the updater and update the game through it. The game must also be launched only via the updater or system_ru/l2.exe, as all development is currently based on the Russian localization.",
+    "files_text_2": "You can report any issues to the administrator on Telegram: @chchch_sbk",
 
     "cabinet_login_1": "Login",
     "cabinet_login_2": "Enter your game login",
