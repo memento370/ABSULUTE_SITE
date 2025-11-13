@@ -30,6 +30,11 @@
     "register_succes_login":"Логін :",
     "register_succes_pass":"Пароль :",
     "register_succes_text_4":"Приємної гри на нашому проєкті! : ",
+    "register_sys_succes": "Успіх",
+    "register_sys_error": "Помилка",
+    "register_sys_sendcode_approve_pass_error":"Підтвердіть пароль",
+    "register_sys_sendcode_approve_pass_do_not_match_error":"Паролі не співпадають",
+
 
     "files_client":"Пропатчений клієнт",
     "files_updater":"Апдейтер",
@@ -46,7 +51,9 @@
     "cabinet_hero_null":"Персонажі не знайдені",
     "cabinet_rase":"Раса",
     "cabinet_lvl":"Рівень",
-    "cabinet_class":"Класс"
+    "cabinet_class":"Класс",
+    "cabinet_sys_get_character_succes":"Персонажі отримані успішно"
+
 
     
 } 

@@ -185,3 +185,43 @@ html, body {
 .lang-ua{
   background-image: url("assets/image/lang_ua.png"); 
 }
+
+
+/* Медіа-запит для мобільних пристроїв (max-width: 768px) */
+@media (max-width: 768px) {
+  .name-main {
+    font-size: 50px; /* Зменшено з 90px для мобілки */
+    margin-top: 1em;
+  }
+
+  .subname-main {
+    font-size: 20px; /* Зменшено з 30px */
+  }
+
+  .top-nav ul {
+    flex-direction: column; /* Вертикальна навігація */
+    padding: 10px 0;
+  }
+
+  .top-nav li {
+    margin: 10px 0; /* Відступи між елементами */
+  }
+
+  .top-nav a {
+    font-size: 24px; /* Зменшено з 30px */
+  }
+
+  .page-container {
+    min-height: 100vh; /* Забезпечення повної висоти */
+    padding: 10px; /* Додаткові відступи для мобілки */
+  }
+
+  .background-container {
+    background-attachment: scroll; /* Зміна на scroll для кращої продуктивності на мобілці */
+  }
+
+  .info-area {
+    width: 90%; /* Адаптація ширини до екрану */
+    font-size: 14px; /* Збільшено для читабельності, але адаптовано */
+  }
+}

@@ -86,3 +86,37 @@
     text-align: center;
   }
   
+
+  /* Медіа-запит для мобільних пристроїв */
+@media (max-width: 768px) {
+  .registration-form {
+    width: 90%; /* Повна ширина */
+    margin: 5em auto 0 auto;
+    padding: 15px;
+  }
+
+  .registration-form .form-group {
+    margin-bottom: 10px;
+  }
+
+  .registration-form .form-control {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .registration-form .btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .registration-form select.form-control {
+    font-size: 12px; /* Адаптація для селектів */
+  }
+
+  .info-area {
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 14px;
+  }
+}

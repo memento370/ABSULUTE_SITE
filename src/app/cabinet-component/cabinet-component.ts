@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { concatMap, Observable, switchMap } from 'rxjs';
+import { concatMap, Observable, Subscription, switchMap } from 'rxjs';
 
 export interface LoginResponse {
   token: string;
@@ -43,12 +44,20 @@ export class CabinetComponent {
     loginAut!: string | null;
     characters: CharacterDTO[] = [];
     selectedCharacter: CharacterDTO | null = null;
+    currentLanguage: string = ''; 
+    private langChangeSubscription: Subscription | undefined;
     constructor(
         private http: HttpClient,
         private toastr: ToastrService,
-        private router: Router
-    ) {}
+        private router: Router,
+        private translate: TranslateService
+    ) {
+        this.currentLanguage = this.translate.currentLang || 'uk';
+    }
     ngOnInit(){
+      this.langChangeSubscription = this.translate.onLangChange.subscribe((event) => {
+          this.currentLanguage = event.lang;
+        });
       const loginTime = localStorage.getItem('loginTime');
       const token = localStorage.getItem('token');
       if (loginTime && token) {
@@ -66,30 +75,33 @@ export class CabinetComponent {
         }
       }
     }
-
+    ngOnDestroy(): void {
+          if (this.langChangeSubscription) {
+            this.langChangeSubscription.unsubscribe();
+          }
+        }
     onSubmit() {
       const account = {
         login: this.login,
         password: this.password
       };
-    
-      this.http.post<LoginResponse>('https://l2-absolute.com/api/site/accounts/login', account)
+      const headers = { 'Accept-Language': this.currentLanguage };
+      this.http.post<LoginResponse>('https://l2-absolute.com/api/site/accounts/login', account,{ headers })
         .subscribe({
           next: (res: LoginResponse) => {
-            this.toastr.success(res.message, "Успех");
+            this.toastr.success(res.message, this.translate.instant('register_sys_succes'));
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
             localStorage.setItem('login', res.login);
             localStorage.setItem('loginTime', Date.now().toString());
             this.loginAut = localStorage.getItem('login');
-            // document.cookie = `token=${res.token}; max-age=3600; path=/; Secure; SameSite=Strict`;
             this.autentification = true;
             setTimeout(() => {
               this.onGetCharacters();
             }, 1000);
           },
           error: (err) => {
-            this.toastr.error(err.error, "Ошибка");
+             this.toastr.error(err.error, this.translate.instant('register_sys_error'));
           }
         });
     }
@@ -99,18 +111,20 @@ export class CabinetComponent {
       this.http.post<CharacterDTO[]>(
         'https://l2-absolute.com/api/server/accounts/characters',
         this.loginAut,
-        {     headers: { 
+        {
+        headers: { 
           'Content-Type': 'text/plain',
-          'Authorization': `Bearer ${token}`
-        } }
+          'Authorization': `Bearer ${token}`,
+          'Accept-Language': this.currentLanguage
+          }
+        }
       ).subscribe({
         next: (res: CharacterDTO[]) => {
           this.characters = res;
-          this.toastr.success('Персонажи успешно получены', 'Успех');
+          this.toastr.success(this.translate.instant('cabinet_sys_get_character_succes'), this.translate.instant('register_sys_succes'));
         },
         error: (err) => {
-          this.toastr.error(err.error, 'Ошибка');
-          console.error(err);
+          this.toastr.error(err.error, this.translate.instant('register_sys_error'));
         }
       });
     }

@@ -58,3 +58,26 @@
     background-color: #004080; /* Темніший колір при натисканні */
   }
   
+
+  /* Медіа-запит для мобільних пристроїв */
+@media (max-width: 768px) {
+  .registration-form {
+    width: 90%; /* Повна ширина екрану */
+    margin: 5em auto 0 auto; /* Зменшено верхній відступ */
+    padding: 15px; /* Зменшено внутрішні відступи */
+  }
+
+  .form-group {
+    margin-bottom: 10px; /* Зменшено відступи */
+  }
+
+  .form-control {
+    font-size: 12px; /* Зменшено шрифт для мобілки */
+    padding: 8px; /* Зменшено padding */
+  }
+
+  .btn {
+    font-size: 14px; /* Зменшено шрифт кнопки */
+    padding: 8px; /* Зменшено padding */
+  }
+}

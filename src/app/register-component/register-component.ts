@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { concatMap, mergeMap, switchMap, timer } from 'rxjs';
+import { concatMap, mergeMap, Subscription, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'register-component',
@@ -11,95 +12,98 @@ import { concatMap, mergeMap, switchMap, timer } from 'rxjs';
 })
 export class RegisterComponent {
 
-    l2email: string = '';
-    login: string = '';
-    password: string = '';
-    confirmPassword: string = '';
-    verificationCode: string = '';
-    isCodeSent: boolean = false;
-    registerSuccess : boolean = false;
-    constructor(
-        private http: HttpClient,
-        private toastr: ToastrService
-    ) {}
+      l2email: string = '';
+      login: string = '';
+      password: string = '';
+      confirmPassword: string = '';
+      verificationCode: string = '';
+      isCodeSent: boolean = false;
+      registerSuccess : boolean = false;
+      currentLanguage: string = ''; 
+      private langChangeSubscription: Subscription | undefined;
+      constructor(
+          private http: HttpClient,
+          private toastr: ToastrService,
+          private translate: TranslateService
+      ) {
+        this.currentLanguage = this.translate.currentLang || 'uk';
+      }
 
-    onSubmit() {
+      ngOnInit(): void {
+          this.langChangeSubscription = this.translate.onLangChange.subscribe((event) => {
+            this.currentLanguage = event.lang;
+          });
+        }
+
+      ngOnDestroy(): void {
+        if (this.langChangeSubscription) {
+          this.langChangeSubscription.unsubscribe();
+        }
+      }
+      sendVerificationCode() {
+        if (!this.confirmPassword) {
+          this.toastr.error(this.translate.instant('register_sys_sendcode_approve_pass_error'),this.translate.instant('register_sys_error'));
+          return;
+        }
+
+        if (this.password !== this.confirmPassword) {
+          this.toastr.error(this.translate.instant('register_sys_sendcode_approve_pass_do_not_match_error'),this.translate.instant('register_sys_error'));
+          return;
+        }
 
         const account = {
           l2email: this.l2email,
           login: this.login,
           password: this.password,
         };
-        this.http.post('https://l2-absolute.com/api/site/accounts/register', account, { responseType: 'text' })
-        .pipe(
-          concatMap((response1: string) => {
-            // Робимо паузу 1 секунду
-            return timer(1000).pipe(
-              // Після паузи виконуємо другий запит
-              mergeMap(() => this.http.post('https://l2-absolute.com/api/server/accounts/register', account, { responseType: 'text' }))
-            );
-          })
-        )
+        const headers = { 'Accept-Language': this.currentLanguage };
+        this.http
+          .post('https://l2-absolute.com/api/site/accounts/check-register', account,
+            { responseType: 'text', headers })
           .subscribe({
-            next: (response: string) => {
-              this.toastr.success(response, "Успех");
-              this.registerSuccess = true;
+            next: () => {
+              this.http
+                .post(
+                  'https://l2-absolute.com/api/site/accounts/send-verification',
+                  { email: this.l2email },
+                  { responseType: 'text' , headers}
+                )
+                .subscribe({
+                  next: (res: string) => {
+                    this.toastr.success(res, this.translate.instant('register_sys_succes'));
+                    this.isCodeSent = true;
+                  },
+                  error: (err) => {
+                    this.toastr.error(err.error, this.translate.instant('register_sys_error'));
+                    this.registerSuccess = false;
+                  },
+                });
             },
-            error: (err: any) => {
-              this.toastr.error(err.error, "Ошибка");
-              this.registerSuccess = false;
-            }
+            error: (err) => {
+              this.toastr.error(err.error, this.translate.instant('register_sys_error'));
+            },
           });
       }
 
-        sendVerificationCode() {
-          if(this.confirmPassword==null||undefined||''){
-            this.toastr.error("Подтвердите пароль", "Ошибка");
-            return;
-          }
-          if (this.password !== this.confirmPassword) {
-            this.toastr.error("Пароли не совпадают", "Ошибка");
-            return;
-          }
-
-            const account = {
-                l2email: this.l2email,
-                login: this.login,
-                password: this.password
-            };
-            this.http.post('https://l2-absolute.com/api/site/accounts/check-register', account, { responseType: 'text' })
-                .pipe(
-                    switchMap(() =>
-                        this.http.post('https://l2-absolute.com/api/site/accounts/send-verification',{email: this.l2email},{ responseType: 'text' })
-                    )
-                )
-                .subscribe({
-                    next: () => {
-                        this.toastr.success('Код подтверждения регистрации отправлен на ваш e-mail. Проверьте ваш почтовый ящик и введите его в поле ниже для подтверждения регистрации');
-                        this.isCodeSent = true;
-                    },
-                    error: (err) => {
-                        this.toastr.error(err.error || 'Произошла ошибка', 'Ошибка');
-                        this.registerSuccess = false;
-                    }
-                });
-        }
         verifyCode() {
-            this.http
-            .post('https://l2-absolute.com/api/site/accounts/verify-code', {
-                email: this.l2email,
-                code: this.verificationCode,
-            },{ responseType: 'text' })
+          const account = {
+            l2email: this.l2email,
+            login: this.login,
+            password: this.password,
+            code: this.verificationCode
+          };
+          const headers = { 'Accept-Language': this.currentLanguage };
+            this.http.post('https://l2-absolute.com/api/site/accounts/verify-code', account, { responseType: 'text' , headers })
             .subscribe({
-                next: () => {
-                    this.toastr.success('Код регистрации подтвержден');
-                this.onSubmit();
-                },
-                error: (err) => {
-                    this.toastr.error(err.error);
-                    this.isCodeSent = false;
-                    this.registerSuccess = false;
-                },
+              next: (res: string) => {
+                this.toastr.success(res, this.translate.instant('register_sys_succes'));
+                this.registerSuccess = true;
+              },
+              error: (err) => {
+                this.toastr.error(err.error);
+                this.isCodeSent = false;
+                this.registerSuccess = false;
+              },
             });
         }
 }

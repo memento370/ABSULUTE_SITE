@@ -30,7 +30,11 @@
     "register_succes_login": "Login:",
     "register_succes_pass": "Password:",
     "register_succes_text_4": "Enjoy playing on our project!",
-
+    "register_sys_succes": "Succes",
+    "register_sys_error": "Error",
+    "register_sys_sendcode_approve_pass_error":"Confirm password",
+    "register_sys_sendcode_approve_pass_do_not_match_error":"Passwords do not match",
+   
     "files_client": "Patched client",
     "files_updater": "Updater",
     "files_link": "Link",
@@ -46,5 +50,8 @@
     "cabinet_hero_null": "No characters found",
     "cabinet_rase": "Race",
     "cabinet_lvl": "Level",
-    "cabinet_class": "Class"
+    "cabinet_class": "Class",
+    "cabinet_sys_get_character_succes":"Get characters is succes"
+
+
 }

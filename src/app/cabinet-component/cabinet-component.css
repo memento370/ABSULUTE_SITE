@@ -67,3 +67,29 @@
     background-color: #fff; /* Білий фон */
   }
   
+  /* Медіа-запит для мобільних пристроїв */
+@media (max-width: 768px) {
+  .registration-form {
+    width: 90%;
+    margin: 5em auto 0 auto;
+    padding: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  select.form-control {
+    font-size: 12px;
+  }
+}
