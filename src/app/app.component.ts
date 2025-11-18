@@ -46,6 +46,9 @@ export class AppComponent {
           case '/files':
             this.currentBackground = 'files';
             break;
+          case '/about':
+            this.currentBackground = 'about';
+            break;
         }
       }
     });

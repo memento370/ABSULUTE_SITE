@@ -1,0 +1,25 @@
+<div class="content-wrapper">
+
+  <!-- Лівий блок з пунктами -->
+  <div class="sidebar">
+    <ul>
+      <li 
+        *ngFor="let section of sections; let i = index"
+        [class.active]="i === activeSection"
+        (click)="scrollToSection(i)">
+        {{ section.title }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Правий блок з текстом -->
+  <div class="content" (scroll)="onContentScroll()">
+    <div *ngFor="let section of sections; let i = index"
+        class="content-section"
+        [attr.id]="'section-' + i">
+        <!-- <h2>{{ section.title }}</h2> -->
+        <div class="html-content" [innerHTML]="section.html"></div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,106 @@
+/* Контейнер */
+.content-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  margin: 20px auto;
+  gap: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Ліве меню */
+.sidebar {
+  width: 250px;
+  background: rgba(0,0,0,0.5);
+  padding: 15px;
+  border-radius: 10px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.3s;
+}
+
+.sidebar li:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.sidebar li.active {
+  background: rgba(0,123,255,0.6);
+}
+
+.content {
+  flex-grow: 1;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;     /* ВАЖЛИВО */
+  border-radius: 10px;
+  color: white;
+  scroll-behavior: smooth;
+  width: 70%;
+}
+
+.content-section {
+  padding-bottom: 40px;
+}
+
+.content-section h2 {
+  margin-top: 0;
+}
+
+/* Застосувати стилі тільки до вмісту, що рендериться через innerHTML */
+.content .html-content {
+  /* необов'язково: шрифт, розмір, міжрядковий інтервал */
+  font-size: 15px;
+  line-height: 1.45;
+  color: inherit;
+}
+
+
+/* Мобільна адаптація */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    height: auto;
+  }
+}
+
+/* Стилі для таблиць */
+.custom-table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  table-layout: fixed;
+  border: 3px solid white !important; /* Збільшена товщина та !important */
+  margin-bottom: 20px;
+}
+
+.custom-table td {
+  border: 1px solid white !important; /* Збільшена товщина та !important */
+  padding: 8px;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3); /* Опціональний: легкий фон для клітинок для кращого контрасту */
+}

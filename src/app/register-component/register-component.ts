@@ -85,25 +85,25 @@ export class RegisterComponent {
           });
       }
 
-        verifyCode() {
-          const account = {
-            l2email: this.l2email,
-            login: this.login,
-            password: this.password,
-            code: this.verificationCode
-          };
-          const headers = { 'Accept-Language': this.currentLanguage };
-            this.http.post('https://l2-absolute.com/api/site/accounts/verify-code', account, { responseType: 'text' , headers })
-            .subscribe({
-              next: (res: string) => {
-                this.toastr.success(res, this.translate.instant('register_sys_succes'));
-                this.registerSuccess = true;
-              },
-              error: (err) => {
-                this.toastr.error(err.error);
-                this.isCodeSent = false;
-                this.registerSuccess = false;
-              },
-            });
-        }
+      verifyCode() {
+        const account = {
+          l2email: this.l2email,
+          login: this.login,
+          password: this.password,
+          code: this.verificationCode
+        };
+        const headers = { 'Accept-Language': this.currentLanguage };
+          this.http.post('https://l2-absolute.com/api/site/accounts/verify-code', account, { responseType: 'text' , headers })
+          .subscribe({
+            next: (res: string) => {
+              this.toastr.success(res, this.translate.instant('register_sys_succes'));
+              this.registerSuccess = true;
+            },
+            error: (err) => {
+              this.toastr.error(err.error);
+              this.isCodeSent = false;
+              this.registerSuccess = false;
+            },
+          });
+      }
 }

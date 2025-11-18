@@ -13,6 +13,7 @@ import { CabinetComponent } from './cabinet-component/cabinet-component';
 import { FilesComponent } from './files-component/files-component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AboutComponent } from './about-component/about-component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,7 +25,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     MainComponent,
     CabinetComponent,
-    FilesComponent
+    FilesComponent,
+    AboutComponent
     
   ],
   imports: [

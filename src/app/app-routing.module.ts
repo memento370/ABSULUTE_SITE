@@ -4,11 +4,13 @@ import { RegisterComponent } from './register-component/register-component';
 import { MainComponent } from './main-component/main-component';
 import { CabinetComponent } from './cabinet-component/cabinet-component';
 import { FilesComponent } from './files-component/files-component';
+import { AboutComponent } from './about-component/about-component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'cabinet', component: CabinetComponent },
   { path: 'files', component: FilesComponent },
+  { path: 'about', component: AboutComponent },
   { path: '', component: MainComponent },
 
 ];

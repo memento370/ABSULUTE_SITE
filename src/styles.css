@@ -175,7 +175,9 @@ html, body {
 .files {
   background-image: url("assets/image/background-files.jpg");
 }
-
+.about {
+  background-image: url("assets/image/background-about.jpg");
+}
 .lang-ru{
   background-image: url("assets/image/lang_ru.png");
 }
