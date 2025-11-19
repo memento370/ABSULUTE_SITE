@@ -52,6 +52,7 @@
   color: white;
   scroll-behavior: smooth;
   width: 70%;
+  scrollbar-width: none;
 }
 
 .content-section {

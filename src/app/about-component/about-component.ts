@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'about-component',
@@ -9,365 +11,356 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None
 })
 export class AboutComponent {
-    constructor(private sanitizer: DomSanitizer) {}
+  currentLanguage: string = '';
+  private langChangeSubscription: Subscription | undefined;
 
-    sanitize(html: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+  constructor(
+    private sanitizer: DomSanitizer,
+    private translate: TranslateService
+  ) {
+    this.currentLanguage = this.translate.currentLang || 'uk';
+    this.buildSections();
+  }
+
+  ngOnInit(): void {
+    this.langChangeSubscription = this.translate.onLangChange.subscribe((event) => {
+      this.currentLanguage = event.lang;
+      this.buildSections();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.langChangeSubscription) {
+      this.langChangeSubscription.unsubscribe();
     }
-    
-    sections = [
-    { 
-        title: "Короткий опис", 
+  }
+
+  sanitize(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  sections: { title: string; html: string }[] = [];
+  activeSection = 0;
+
+  private buildSections() {
+    this.sections = [
+      {
+        title: this.translate.instant('about.short.title'),
         html: `
-            <b><h1 class="text-center">Короткий опис серверу</h1></b><br>
-            <h3>Бездонатний сервер Lineage 2 Interlude , на клієнті Classic. Основний акцент серверу х10 сконцентровано на автентичності
-            хронік Interlude , задля найкращого ігрового досвіду наших гравців.Для адміністрації серверу головне в першу чергу створити комфортну атмосферу для гри,
-            в якій буде повністю відсутня концепція "PAY2WIN",зарплатних кланів,не справедливого відношення адміністрації до гравця. Це наш перший запуск,тому опис серверу може змінюватися,або доповнюватися.</h3>
-            <h3>Враховуючи бездонатну концепцію , сервер буде на платній підписці ,про що буде повідомлено гравців окремо. Наразі,ми тільки на стадії зародження,і от-от будемо викатуватись в стадію альфа-тестування.
-            Сподіваємося на ваше розуміння ,адже оренда більш потужної машини,та інші витрати,наразі покриваються із гаманця адміністрації.Враховуючи майбутні підписки,увімкнено систему авторизації на кількох персонажів з одного ігрового акаунту. Максимум вікон онлайн - 7.</h3>
-            <h3>Короткі основні рейти серверу:</h3>
-            <h3>Рейт EXP/SP : х10.</h3>
-            <h3>Рейт EXP/SP з рейд-босів: х10.</h3>
-            <h3>Рейт дропу:х5</h3>
-            <h3>Рейт спойлу:х3</h3>
-            <h3>Рейт дропу з рейд-боссів:х5</h3>
-            <h3>Рейт випадіння Seal Stone:x1,максимальний депозит Seal stone :10000000</h3>
-            <h3>Рейт квестів:х2</h3>
-            <h3>Рейт манору:х2</h3>
-            <h3>Шаут чат = глобальний чат(на перший час)</h3>
-            <h3>Наявна поштова система</h3>
-            <h3>Top NG на старті</h3>
-            <h3>20 баф слотів,12 денс-сонг слотів,8 слотів дебафів</h3>
-            <h3>Монстри-чемпіони 20+рівня,х10 та х50. Шанс спавну : 5 та 2 відсотки відповідно</h3>
-            <h3>Бонус до EXP/SP,за прокачку в групі,від 30% до 67%,збільшено відстань,на якій дроп та досвід отримують всі члени групи</h3>
-            <h3>Безкоштовні телепорти до 40 рівня</h3>
-            <h3>Спавн рейд босів : 20-40 рівень - 6 годин + 2 години випадкового спавну,41-60 рівень - 8 годин + 3 години випадкового спавну , 61+ рівень - 10 годин + 4 години випадкового спавну.</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.short.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.short.desc1')}</h3>
+          <h3>${this.translate.instant('about.short.desc2')}</h3>
+          <h3>${this.translate.instant('about.short.short_rates')}</h3>
+          <h3>${this.translate.instant('about.short.rate_exp')}</h3>
+          <h3>${this.translate.instant('about.short.rate_exp_rb')}</h3>
+          <h3>${this.translate.instant('about.short.rate_drop')}</h3>
+          <h3>${this.translate.instant('about.short.rate_spoil')}</h3>
+          <h3>${this.translate.instant('about.short.rate_drop_rb')}</h3>
+          <h3>${this.translate.instant('about.short.rate_seal_stone')}</h3>
+          <h3>${this.translate.instant('about.short.rate_quests')}</h3>
+          <h3>${this.translate.instant('about.short.rate_manor')}</h3>
+          <h3>${this.translate.instant('about.short.shout_chat')}</h3>
+          <h3>${this.translate.instant('about.short.mail_system')}</h3>
+          <h3>${this.translate.instant('about.short.top_ng')}</h3>
+          <h3>${this.translate.instant('about.short.buff_slots')}</h3>
+          <h3>${this.translate.instant('about.short.champions')}</h3>
+          <h3>${this.translate.instant('about.short.group_bonus')}</h3>
+          <h3>${this.translate.instant('about.short.free_tp')}</h3>
+          <h3>${this.translate.instant('about.short.rb_spawn')}</h3>
         `
-    },
-    { 
-        title: "Повний опис рейтів", 
+      },
+      {
+        title: this.translate.instant('about.rates.title'),
         html: `
-        <b><h1 class="text-center">Повний опис рейтів</h1></b><br>
-        <h3>Рейт EXP/SP : x10</h3>
-        <h3>Рейт EXP/SP з рейд-босів: х10.</h3>
-        <h3>Рейт дропу адени : х5</h3>
-        <h3>Рейт випадіння Seal Stone:x1,максимальний депозит Seal stone :10000000</h3>
-        <h3>Рейт дропу речей : х5</h3>
-        <h3>Рейт спойлу : х3</h3>
-        <h3>Рейт дропу,нагороди,адени,EXP SP на квести : х2</h3>
-        <h3>Рейт дропу речей з рейд-босів : х5</h3>
-        <h3>Рейт на рибалку : х10</h3>
-        <h3>Рейт кланової репутації : х2</h3>
-        <h3>Рейт манору : х3</h3>
-        <h3>Рейт вартості вивчення скілів : х1</h3>
-
+          <b><h1 class="text-center">${this.translate.instant('about.rates.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.rates.rate_exp')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_exp_rb')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_adena')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_seal_stone')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_items')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_spoil')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_quest_rewards')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_items_rb')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_fishing')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_clan_rep')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_manor')}</h3>
+          <h3>${this.translate.instant('about.rates.rate_skill_cost')}</h3>
         `
-    },
-    { 
-        title: "Dimension Rift", 
+      },
+      {
+        title: this.translate.instant('about.rift.title'),
         html: `
-        <b><h1 class="text-center">Налаштування Dimension Rift</h1></b><br>
-        <h3>мінімальний розмір групи для входу : 2.</h3>
-        <h3>Максимальна кількість "стрибків" між кімнатами - 4. Після ,групу виведе в зал очікування.</h3>
-        <h3>Затримка між "страбками"між кімнатами - 8 хвилин.</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.rift.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.rift.min_group')}</h3>
+          <h3>${this.translate.instant('about.rift.max_jumps')}</h3>
+          <h3>${this.translate.instant('about.rift.delay')}</h3>
         `
-    },
-    { 
-        title: "Гра в группі", 
+      },
+      {
+        title: this.translate.instant('about.group.title'),
         html: `
-        <b><h1 class="text-center">Гра в группі</h1></b><br>
-        <h3>Збільшено радіус,в якому персонажі отримують нагороду в групі ,з 1500 одиниць,до 5000 одиниць.</h3>
-        <h3>Різниця по рівню для прокачки в группі : 14 рівнів.</h3>
-        <h3>Бонуси до EXP/SP для групи,в тому числі quest items<br>
-            2 гравці в групі 30%<br>
-            3 гравці в групі 39%<br>
-            4 гравці в групі 50%<br>
-            5 гравців в групі 54%<br>
-            6 гравців в групі 58%<br>
-            7 гравців в групі 63%<br>
-            8 гравців в групі 65%<br>
-            9 гравців в групі 67%</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.group.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.group.radius')}</h3>
+          <h3>${this.translate.instant('about.group.level_diff')}</h3>
+          <h3>${this.translate.instant('about.group.bonuses')}</h3>
         `
-    },
-    { 
-        title: "Заточка", 
+      },
+      {
+        title: this.translate.instant('about.enchant.title'),
         html: `
-        <b><h1 class="text-center">Шанси заточки</h1></b><br>
-        <h3>На нашому проєкті шанси заточки зброї ,обладунків та прикрас,мають різні шанси,залежно від рівня нинішньої заточки.</h3>
-        <h3>Максимальна заточка зброї = 16. Максимальна заточка обладунків та біжутерії - 12. Цільна броня(верх та низ в одному слоті) гарантовано точиться на +4 з шансом 100%.
-        Отже шанси заточки наступні : </h3>
-        <h2>Зброя : </h2>
-        <div class="tables-block">
-        <table class="custom-table">
-            <tr>
-            <td>+1</td>
-            <td>+2</td>
-            <td>+3</td>
-            <td>+4</td>
-            <td>+5</td>
-            <td>+6</td>
-            <td>+7</td>
-            <td>+8</td>
-            <td>+9</td>
-            <td>+10</td>
-            <td>+11</td>
-            <td>+12</td>
-            <td>+13</td>
-            <td>+14</td>
-            <td>+15</td>
-            <td>+16</td>
-            </tr>
-            <tr>
-            <td>100%</td>
-            <td>100%</td>
-            <td>100%</td>
-            <td>50%</td>
-            <td>50%</td>
-            <td>50%</td>
-            <td>40%</td>
-            <td>40%</td>
-            <td>30%</td>
-            <td>30%</td>
-            <td>20%</td>
-            <td>20%</td>
-            <td>15%</td>
-            <td>15%</td>
-            <td>10%</td>
-            <td>10%</td>
-            </tr>
-        </table>
-        <h3>Обладунки : </h3>
-        <table class="custom-table">
-            <tr>
-            <td>+1</td>
-            <td>+2</td>
-            <td>+3</td>
-            <td>+4</td>
-            <td>+5</td>
-            <td>+6</td>
-            <td>+7</td>
-            <td>+8</td>
-            <td>+9</td>
-            <td>+10</td>
-            <td>+11</td>
-            <td>+12</td>
-            </tr>
-            <tr>
-            <td>100%</td>
-            <td>100%</td>
-            <td>100%</td>
-            <td>50%</td>
-            <td>50%</td>
-            <td>50%</td>
-            <td>40%</td>
-            <td>40%</td>
-            <td>30%</td>
-            <td>30%</td>
-            <td>20%</td>
-            <td>20%</td>
-            </tr>
-        </table>
-        <h3>Аналогічно для благословенних свитків,тільки +5% до шансу.При невдачі ,скидання на +0.</h3>
-        <h3>Зброя :</h3>
-        <table class="custom-table">
-            <tr>
-            <td>+1</td>
-            <td>+2</td>
-            <td>+3</td>
-            <td>+4</td>
-            <td>+5</td>
-            <td>+6</td>
-            <td>+7</td>
-            <td>+8</td>
-            <td>+9</td>
-            <td>+10</td>
-            <td>+11</td>
-            <td>+12</td>
-            <td>+13</td>
-            <td>+14</td>
-            <td>+15</td>
-            <td>+16</td>
-            </tr>
-            <tr>
-            <td>100%</td>
-            <td>100%</td>
-            <td>100%</td>
-            <td>55%</td>
-            <td>55%</td>
-            <td>55%</td>
-            <td>45%</td>
-            <td>45%</td>
-            <td>35%</td>
-            <td>35%</td>
-            <td>25%</td>
-            <td>25%</td>
-            <td>20%</td>
-            <td>20%</td>
-            <td>15%</td>
-            <td>15%</td>
-            </tr>
-        </table>
-        <h3>Обладунки : </h3>
-        <table class="custom-table">
-            <tr>
-            <td>+1</td>
-            <td>+2</td>
-            <td>+3</td>
-            <td>+4</td>
-            <td>+5</td>
-            <td>+6</td>
-            <td>+7</td>
-            <td>+8</td>
-            <td>+9</td>
-            <td>+10</td>
-            <td>+11</td>
-            <td>+12</td>
-            </tr>
-            <tr>
-            <td>100%</td>
-            <td>100%</td>
-            <td>100%</td>
-            <td>55%</td>
-            <td>55%</td>
-            <td>55%</td>
-            <td>45%</td>
-            <td>45%</td>
-            <td>35%</td>
-            <td>35%</td>
-            <td>25%</td>
-            <td>25%</td>
-            </tr>
-        </table>
-        </div>
-        
+          <b><h1 class="text-center">${this.translate.instant('about.enchant.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.enchant.desc1')}</h3>
+          <h3>${this.translate.instant('about.enchant.desc2')}</h3>
+          <h2>${this.translate.instant('about.enchant.weapon')}</h2>
+          <div class="tables-block">
+            <table class="custom-table">
+              <tr>
+                <td>+1</td>
+                <td>+2</td>
+                <td>+3</td>
+                <td>+4</td>
+                <td>+5</td>
+                <td>+6</td>
+                <td>+7</td>
+                <td>+8</td>
+                <td>+9</td>
+                <td>+10</td>
+                <td>+11</td>
+                <td>+12</td>
+                <td>+13</td>
+                <td>+14</td>
+                <td>+15</td>
+                <td>+16</td>
+              </tr>
+              <tr>
+                <td>100%</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td>50%</td>
+                <td>50%</td>
+                <td>50%</td>
+                <td>40%</td>
+                <td>40%</td>
+                <td>30%</td>
+                <td>30%</td>
+                <td>20%</td>
+                <td>20%</td>
+                <td>15%</td>
+                <td>15%</td>
+                <td>10%</td>
+                <td>10%</td>
+              </tr>
+            </table>
+            <h3>${this.translate.instant('about.enchant.armor')}</h3>
+            <table class="custom-table">
+              <tr>
+                <td>+1</td>
+                <td>+2</td>
+                <td>+3</td>
+                <td>+4</td>
+                <td>+5</td>
+                <td>+6</td>
+                <td>+7</td>
+                <td>+8</td>
+                <td>+9</td>
+                <td>+10</td>
+                <td>+11</td>
+                <td>+12</td>
+              </tr>
+              <tr>
+                <td>100%</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td>50%</td>
+                <td>50%</td>
+                <td>50%</td>
+                <td>40%</td>
+                <td>40%</td>
+                <td>30%</td>
+                <td>30%</td>
+                <td>20%</td>
+                <td>20%</td>
+              </tr>
+            </table>
+            <h3>${this.translate.instant('about.enchant.blessed')}</h3>
+            <h3>${this.translate.instant('about.enchant.weapon')}</h3>
+            <table class="custom-table">
+              <tr>
+                <td>+1</td>
+                <td>+2</td>
+                <td>+3</td>
+                <td>+4</td>
+                <td>+5</td>
+                <td>+6</td>
+                <td>+7</td>
+                <td>+8</td>
+                <td>+9</td>
+                <td>+10</td>
+                <td>+11</td>
+                <td>+12</td>
+                <td>+13</td>
+                <td>+14</td>
+                <td>+15</td>
+                <td>+16</td>
+              </tr>
+              <tr>
+                <td>100%</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td>55%</td>
+                <td>55%</td>
+                <td>55%</td>
+                <td>45%</td>
+                <td>45%</td>
+                <td>35%</td>
+                <td>35%</td>
+                <td>25%</td>
+                <td>25%</td>
+                <td>20%</td>
+                <td>20%</td>
+                <td>15%</td>
+                <td>15%</td>
+              </tr>
+            </table>
+            <h3>${this.translate.instant('about.enchant.armor')}</h3>
+            <table class="custom-table">
+              <tr>
+                <td>+1</td>
+                <td>+2</td>
+                <td>+3</td>
+                <td>+4</td>
+                <td>+5</td>
+                <td>+6</td>
+                <td>+7</td>
+                <td>+8</td>
+                <td>+9</td>
+                <td>+10</td>
+                <td>+11</td>
+                <td>+12</td>
+              </tr>
+              <tr>
+                <td>100%</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td>55%</td>
+                <td>55%</td>
+                <td>55%</td>
+                <td>45%</td>
+                <td>45%</td>
+                <td>35%</td>
+                <td>35%</td>
+                <td>25%</td>
+                <td>25%</td>
+              </tr>
+            </table>
+          </div>
         `
-    },
-    { 
-        title: "Епік боси", 
+      },
+      {
+        title: this.translate.instant('about.epic.title'),
         html: `
-        <b><h1 class="text-center">Налаштування Епічних босів</h1></b><br>
-        <b><h1 class="text-center">Queen Ant</h1></b><br>
-        <h3>Рівень епічного боса : 40.</h3>
-        <h3>Спавн : 24 години + 1 година випадкового спавну.</h3>
-        <h3>Шанс випадіння Ring of Queen Ant = 100%. Інший дроп згідно канону.</h3>
-
-        <b><h1 class="text-center">Orfen</h1></b><br>
-        <h3>Рівень епічного боса : 50.</h3>
-        <h3>Спавн : 24 години + 4 години випадкового спавну.</h3>
-        <h3>Шанс випадіння Earring of Orfen = 100%. Інший дроп згідно канону.</h3>
-        <h3>Бос використовує вміння телепортації гравців до себе</h3>
-
-        <b><h1 class="text-center">Core</h1></b><br>
-        <h3>Рівень епічного боса : 50.</h3>
-        <h3>Спавн : 24 години + 4 години випадкового спавну.</h3>
-        <h3>Шанс випадіння Earring of Orfen = 100%. Інший дроп згідно канону.</h3>
-
-        <b><h1 class="text-center">Zaken</h1></b><br>
-        <h3>Рівень епічного боса : 60.</h3>
-        <h3>Спавн : 48 годин</h3>
-        <h3>Двері на кораблі що ведуть до Zaken відчиняються на час ігрової частини ночі.</h3>
-        <h3>Шанс випадіння Zaken's Earring = 100%. Інший дроп згідно канону.</h3>
-
-        <b><h1 class="text-center">Baium</h1></b><br>
-        <h3>Рівень епічного боса : 75.</h3>
-        <h3>Спавн : 5 днів +8 годин випадкового спавну</h3>
-        <h3>Необхідне проходження квесту An Arrogant Search</h3>
-        <h3>Час сну баюма : 30 хвилин.</h3>
-        <h3>Час ,після якого очищається зона якщо гравці померли : 1 хвилина</h3>
-        <h3>Ліміт часу на фарм баюма відсутній.</h3>
-        <h3>Шанс випадіння Ring of Baium = 100%. Інший дроп згідно канону.</h3>
-
-        <b><h1 class="text-center">Antharas</h1></b><br>
-        <h3>Рівень епічного боса : 79.</h3>
-        <h3>Спавн : 11 днів</h3>
-        <h3>Час сну Антараса : 15 хвилин.</h3>
-        <h3>Час,через який Антарас вийде з лігва ,після потрапляння в зону хоча б однієї групи : 10 хвилин</h3>
-        <h3>Час,після якого очищається зона якщо всі гравці померли : 1 хвилина.</h3>
-        <h3>Ліміт по часу фарма Антараса : відсутній</h3>
-        <h3>Шанс випадіння Earring of Antharas = 100%. Інший дроп згідно канону</h3>
-
-        <b><h1 class="text-center">Valakas</h1></b><br>
-        <h3>Рівень епічного боса : 85.</h3>
-        <h3>Спавн : 11 днів</h3>
-        <h3>Час сну Валакаса : 15 хвилин.</h3<
-        <h3>Час,через який Валакас вийде з лігва ,після потрапляння в зону хоча б однієї групи : 15 хвилин</h3>
-        <h3>Час,після якого очищається зона якщо всі гравці померли : 1 хвилина.</h3>
-        <h3>Ліміт по часу фарма Валакаса : відсутній</h3>
-        <h3>Шанс випадіння Necklace of Valakas = 100%. Інший дроп згідно канону</h3>
-
-        <b><h1 class="text-center">Frintezza</h1></b><br>
-        <h3>Рівень епічного боса : 85.</h3>
-        <h3>Спавн : 2 дні</h3>
-        <h3>Мінімум паті в командному каналі для входу : 2 , максимум : 5.</h3>
-        <h3>Мінімальна відстань від NPC для входу в гробницю : 300 одиниць.</h3>
-        <h3>Ліміт по часу для проходу до фрінтези і його фарму: 35 хвилин</h3>
-        <h3>Шанс випадіння Frintezza's Necklace = 100%. Інший дроп згідно канону</h3>
-
-        <b><h1 class="text-center">Sailren</h1></b><br>
-        <h3>Рівень епічного боса : 80.</h3>
-        <h3>Спавн : 1 день</h3>
-        <h3>Час активаціх "спаму мобами" сайлрена : 120 хвилин.</h3>
-        <h3>Час спавну при активації "спаму мобами"сайлрена : 1 хвилина</h3>
-        <h3>Час,після якого очищається зона якщо всі гравці померли : 1 хвилина.</h3>
-
+          <b><h1 class="text-center">${this.translate.instant('about.epic.header')}</h1></b><br>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.qa_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.qa_level')}</h3>
+          <h3>${this.translate.instant('about.epic.qa_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.qa_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.orfen_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.orfen_level')}</h3>
+          <h3>${this.translate.instant('about.epic.orfen_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.orfen_drop')}</h3>
+          <h3>${this.translate.instant('about.epic.orfen_skill')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.core_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.core_level')}</h3>
+          <h3>${this.translate.instant('about.epic.core_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.core_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.zaken_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.zaken_level')}</h3>
+          <h3>${this.translate.instant('about.epic.zaken_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.zaken_doors')}</h3>
+          <h3>${this.translate.instant('about.epic.zaken_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.baium_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.baium_level')}</h3>
+          <h3>${this.translate.instant('about.epic.baium_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.baium_quest')}</h3>
+          <h3>${this.translate.instant('about.epic.baium_sleep')}</h3>
+          <h3>${this.translate.instant('about.epic.baium_clear')}</h3>
+          <h3>${this.translate.instant('about.epic.baium_time_limit')}</h3>
+          <h3>${this.translate.instant('about.epic.baium_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.antharas_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.antharas_level')}</h3>
+          <h3>${this.translate.instant('about.epic.antharas_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.antharas_sleep')}</h3>
+          <h3>${this.translate.instant('about.epic.antharas_exit')}</h3>
+          <h3>${this.translate.instant('about.epic.antharas_clear')}</h3>
+          <h3>${this.translate.instant('about.epic.antharas_time_limit')}</h3>
+          <h3>${this.translate.instant('about.epic.antharas_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.valakas_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.valakas_level')}</h3>
+          <h3>${this.translate.instant('about.epic.valakas_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.valakas_sleep')}</h3>
+          <h3>${this.translate.instant('about.epic.valakas_exit')}</h3>
+          <h3>${this.translate.instant('about.epic.valakas_clear')}</h3>
+          <h3>${this.translate.instant('about.epic.valakas_time_limit')}</h3>
+          <h3>${this.translate.instant('about.epic.valakas_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.frintezza_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.frintezza_level')}</h3>
+          <h3>${this.translate.instant('about.epic.frintezza_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.frintezza_parties')}</h3>
+          <h3>${this.translate.instant('about.epic.frintezza_distance')}</h3>
+          <h3>${this.translate.instant('about.epic.frintezza_time_limit')}</h3>
+          <h3>${this.translate.instant('about.epic.frintezza_drop')}</h3>
+          <b><h1 class="text-center">${this.translate.instant('about.epic.sailren_header')}</h1></b><br>
+          <h3>${this.translate.instant('about.epic.sailren_level')}</h3>
+          <h3>${this.translate.instant('about.epic.sailren_spawn')}</h3>
+          <h3>${this.translate.instant('about.epic.sailren_mob_spawn_time')}</h3>
+          <h3>${this.translate.instant('about.epic.sailren_mob_interval')}</h3>
+          <h3>${this.translate.instant('about.epic.sailren_clear')}</h3>
         `
-    },
-    { 
-        title: "Інші налаштування", 
+      },
+      {
+        title: this.translate.instant('about.other.title'),
         html: `
-        <b><h1 class="text-center">Інші налаштування</h1></b><br>
-        <h3>Автолут увімкнено</h3>
-        <h3>Автолут хербів вимкнено</h3>
-        <h3>Гравець з кармою,та/або проклятою зброєю,може користуватися магазинами</h3>
-        <h3>Книжки для вивчення уміннь не потрібні,скіли вивчаються у NPC</h3>
-        <h3>Поріг розриву для видалення уміннь у персонажів в залежності від уміння та рівня персонажу = 10 </h3>
-        <h3>Дропліст по shift+click</h3>
-        <h3>Сабкласс - потрібен квест,мінімальний рівень для додавання сабклассу - 65 , рівень сабклассу - 40 , максимум сабклассів - 3.</h3>
-        <h3>Перевірка телепортером в катакомби гравців на предмет реєстрації в евенті 7 печатей. При атаці монстрів незареєстрованими гравцями,телепортація із катакомб. Мамони доступні тільки зареєстрованим гравцям.</h3>
-        <h3>Шанс отримання Death Penalty після смерті - 10%. Recovery scroll доступні для Player Killer(PC). При активному Death Penalty ,є штраф на отримання EXP.</h3>
-        <h3>Мінімальний розмір групи для участі в Festival of Darkness = 5 </h3>
-        <h3>Увімкнено квест 4 кубки(Four Sepulcher),мінімальна кількість гравців для входу : 4 , вхід в кожну 55 хвилину.</h3>
-        <h3>Інструктовані речі(З Life Stone) можна передавати,продавати,та викидати</h3>
-        <h3>При використанні пісень та танців(song and dance),збільшується витрати MP. Витрати MP не збільшуються , якщо час dance/song менше 10 секунд. </h3>
+          <b><h1 class="text-center">${this.translate.instant('about.other.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.other.auto_loot')}</h3>
+          <h3>${this.translate.instant('about.other.auto_loot_herbs')}</h3>
+          <h3>${this.translate.instant('about.other.karma_stores')}</h3>
+          <h3>${this.translate.instant('about.other.skill_books')}</h3>
+          <h3>${this.translate.instant('about.other.skill_gap')}</h3>
+          <h3>${this.translate.instant('about.other.drop_list')}</h3>
+          <h3>${this.translate.instant('about.other.subclass')}</h3>
+          <h3>${this.translate.instant('about.other.catacombs_check')}</h3>
+          <h3>${this.translate.instant('about.other.death_penalty')}</h3>
+          <h3>${this.translate.instant('about.other.festival_group')}</h3>
+          <h3>${this.translate.instant('about.other.four_sep')}</h3>
+          <h3>${this.translate.instant('about.other.aug_items')}</h3>
+          <h3>${this.translate.instant('about.other.song_dance_mp')}</h3>
         `
-    },
-    
+      }
     ];
-    activeSection = 0;
+  }
 
-    scrollToSection(index: number) {
+  scrollToSection(index: number) {
     const content = document.querySelector('.content') as HTMLElement;
     const target = document.getElementById('section-' + index);
-
     if (!content || !target) return;
-
     content.scrollTo({
-        top: target.offsetTop,
-        behavior: 'smooth'
+      top: target.offsetTop,
+      behavior: 'smooth'
     });
-
     this.activeSection = index;
-    }
+  }
 
-    onContentScroll() {
+  onContentScroll() {
     const container = document.querySelector('.content') as HTMLElement;
-    const sections = Array.from(
-        document.querySelectorAll('.content-section')
-    ) as HTMLElement[];
-
+    const sections = Array.from(document.querySelectorAll('.content-section')) as HTMLElement[];
     const containerTop = container.scrollTop;
-
     for (let i = 0; i < sections.length; i++) {
-        const sectionTop = sections[i].offsetTop;
-        const sectionHeight = sections[i].offsetHeight;
-
-        if (
-        containerTop >= sectionTop - 20 &&
-        containerTop < sectionTop + sectionHeight - 20
-        ) {
+      const sectionTop = sections[i].offsetTop;
+      const sectionHeight = sections[i].offsetHeight;
+      if (containerTop >= sectionTop - 20 && containerTop < sectionTop + sectionHeight - 20) {
         this.activeSection = i;
         break;
-        }
+      }
     }
-    }
+  }
 }
