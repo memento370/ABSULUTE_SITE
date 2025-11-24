@@ -88,6 +88,36 @@ export class AboutComponent {
         `
       },
       {
+        title: this.translate.instant('about.buffer.title'),
+        html: `
+          <b><h1 class="text-center">${this.translate.instant('about.buffer.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.buffer.intro')}</h3>
+          <h3>${this.translate.instant('about.buffer.warrior_1_20_title')}</h3>
+          <h3>${this.translate.instant('about.buffer.warrior_1_20_buffs')}</h3>
+          <img src="/assets/image/buffers/war_1_buff.png" alt="war_1_buff">
+
+          <h3>${this.translate.instant('about.buffer.warrior_20_40_title')}</h3>
+          <h3>${this.translate.instant('about.buffer.warrior_20_40_buffs')}</h3>
+          <img src="/assets/image/buffers/war_20_buff.png" alt="war_20_buff">
+
+          <h3>${this.translate.instant('about.buffer.warrior_40_title')}</h3>
+          <h3>${this.translate.instant('about.buffer.warrior_40_buffs')}</h3>
+          <img src="/assets/image/buffers/war_40_buff.png" alt="war_40_buff">
+
+          <h3>${this.translate.instant('about.buffer.mage_1_20_title')}</h3>
+          <h3>${this.translate.instant('about.buffer.mage_1_20_buffs')}</h3>
+          <img src="/assets/image/buffers/mage_1_buff.png" alt="mage_1_buff">
+
+          <h3>${this.translate.instant('about.buffer.mage_20_40_title')}</h3>
+          <h3>${this.translate.instant('about.buffer.mage_20_40_buffs')}</h3>
+          <img src="/assets/image/buffers/mage_20_buff.png" alt="mage_20_buff">
+
+          <h3>${this.translate.instant('about.buffer.mage_40_title')}</h3>
+          <h3>${this.translate.instant('about.buffer.mage_40_buffs')}</h3>
+          <img src="/assets/image/buffers/mage_40_buff.png" alt="mage_40_buff">
+        `
+      },
+      {
         title: this.translate.instant('about.rift.title'),
         html: `
           <b><h1 class="text-center">${this.translate.instant('about.rift.header')}</h1></b><br>

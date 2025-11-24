@@ -185,5 +185,21 @@
     "about.other.festival_group": "Мінімальний розмір групи для участі в Festival of Darkness = 5 ",
     "about.other.four_sep": "Увімкнено квест 4 кубки(Four Sepulcher),мінімальна кількість гравців для входу : 4 , вхід в кожну 55 хвилину.",
     "about.other.aug_items": "Інструктовані речі(З Life Stone) можна передавати,продавати,та викидати",
-    "about.other.song_dance_mp": "При використанні пісень та танців(song and dance),збільшується витрати MP. Витрати MP не збільшуються , якщо час dance/song менше 10 секунд. "
+    "about.other.song_dance_mp": "При використанні пісень та танців(song and dance),збільшується витрати MP. Витрати MP не збільшуються , якщо час dance/song менше 10 секунд. ",
+    
+    "about.buffer.title": "Баффер",
+    "about.buffer.header": "Бафери Newbie guide та Adventure guildmans",
+    "about.buffer.intro": "На нашому сервері передбачена система баферів у Newbie Guide та Adventure Guildmans , для максимального збереження автентичності контенту.<br>Бафера було розроблено таким чином , щоб спростити розкачку на початковій та середній стадії гри ,і частково - на високих рівнях,але в той же самий час,не знецінити професії баферів.<br>Бафери надають різні бафи в залежності від рівня,та класу персонажа.",
+    "about.buffer.warrior_1_20_title": "Баффи воїнів : 1-20 рівень : ",
+    "about.buffer.warrior_1_20_buffs": "Might 1 lvl<br>Shield 1 lvl<br>Vampiric rage 1 lvl<br>Blessed body 1 lvl<br>Regeneration 1 lvl<br>Haste 1 lvl<br>Life Cubic 1 lvl",
+    "about.buffer.warrior_20_40_title": "Баффи воїнів : 20-40 рівень : ",
+    "about.buffer.warrior_20_40_buffs": "Wind Walk 2 lvl<br>Might 1 lvl<br>Shield 1 lvl<br>Life cubic 1 lvl<br>Focus 1 lvl<br>Magic barrier 1 lvl<br>Vampiric rage 1 lvl<br>Blessed body 1 lvl<br>Haste 1 lvl<br>Regeneration 1 lvl<br>Death Whisper 1 lvl<br>Bless Shield 1 lvl<br>Guidance 1 lvl<br>Agility 1 lvl",
+    "about.buffer.warrior_40_title": "Баффи воїнів : 40+ рівень : ",
+    "about.buffer.warrior_40_buffs": "Wind Walk 2 lvl<br>Might 2 lvl<br>Shield 2 lvl<br>Focus 2 lvl<br>Magic barrier 2 lvl<br>Vampiric rage 2 lvl<br>Blessed body 2 lvl<br>Blessed soul 2 lvl<br>Haste 2 lvl<br>Regeneration 2 lvl<br>Death Whisper 2 lvl<br>Bless Shield 2 lvl<br>Guidance 2 lvl<br>Agility 2 lvl<br>Berserk 2 lvl<br>Song Of earth 1 lvl<br>Dance of the Warrior 1 lvl",
+    "about.buffer.mage_1_20_title": "Баффи магів : 1-20 рівень : ",
+    "about.buffer.mage_1_20_buffs": "Wind Walk 1 lvl<br>Shield 1 lvl<br>Blessed soul 1 lvl<br>Acumen 1 lvl<br>Concentration 1 lvl<br>Empower 1 lvl<br>Life Cubic 1 lvl",
+    "about.buffer.mage_20_40_title": "Баффи магів : 20-40 рівень : ",
+    "about.buffer.mage_20_40_buffs": "Wind Walk 2 lvl<br>Shield 1 lvl<br>Magic barrier 1 lvl<br>Regeneration 1 lvl<br>Life Cubic 1 lvl<br>Empower 2 lvl<br>Concentration 1 lvl<br>Acumen 2 lvl<br>Blessed soul 1 lvl<br>Bless Shield 1 lvl<br>Clarity 1 lvl",
+    "about.buffer.mage_40_title": "Баффи магів : 40+ рівень : ",
+    "about.buffer.mage_40_buffs": "Wind Walk 2 lvl<br>Shield 2 lvl<br>Magic barrier 2 lvl<br>Regeneration 2 lvl<br>Empower 2 lvl<br>Concentration 2 lvl<br>Acumen 2 lvl<br>Blessed soul 2 lvl<br>Bless Shield 2 lvl<br>Clarity 1 lvl<br>Berserk 2 lvl<br>Song Of earth 1 lvl<br>Dance of the Mystic 1 lvl"
 }

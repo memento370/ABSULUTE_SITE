@@ -70,24 +70,6 @@
   line-height: 1.45;
   color: inherit;
 }
-
-
-/* Мобільна адаптація */
-@media (max-width: 768px) {
-  .content-wrapper {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-  }
-
-  .content {
-    height: auto;
-  }
-}
-
 /* Стилі для таблиць */
 .custom-table {
   width: 100%;
@@ -105,3 +87,27 @@
   color: white;
   background-color: rgba(0, 0, 0, 0.3); /* Опціональний: легкий фон для клітинок для кращого контрасту */
 }
+
+.html-content img {
+  max-width: 100%; /* Автоматична адаптація */
+  height: auto;
+  display: block; /* Щоб уникнути зайвих відступів */
+  margin: 10px 0; /* Відступи зверху/знизу */
+}
+
+/* Мобільна адаптація */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    height: auto;
+  }
+}
+
