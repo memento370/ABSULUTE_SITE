@@ -189,41 +189,78 @@ html, body {
 }
 
 
-/* Медіа-запит для мобільних пристроїв (max-width: 768px) */
+/* ==== МОБІЛЬНА ВЕРСТКА — ТІЛЬКИ ≤768px ==== */
 @media (max-width: 768px) {
-  .name-main {
-    font-size: 50px; /* Зменшено з 90px для мобілки */
-    margin-top: 1em;
+  /* Фіксуємо навігацію зверху + напівпрозорий фон для читабельності */
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.65); /* трохи темніше, щоб текст завжди читався */
+    backdrop-filter: blur(8px); /* красиве розмиття — сучасно */
+    padding: 8px 0;
   }
 
-  .subname-main {
-    font-size: 20px; /* Зменшено з 30px */
+  /* Псевдоелемент з кольоровою анімацією залишаємо, але робимо його трохи прозорішим */
+  .top-nav::before {
+    opacity: 0.4;
   }
 
+  /* Меню в 2 ряди максимум */
   .top-nav ul {
-    flex-direction: column; /* Вертикальна навігація */
-    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 12px; /* вертикаль + горизонталь */
+    margin: 0;
+    padding: 0 12px;
   }
 
   .top-nav li {
-    margin: 10px 0; /* Відступи між елементами */
+    flex: 1 1 42%;           /* ≈ 2 елементи в ряд на більшості телефонів */
+    max-width: 20%;          /* гарантія, що не буде більше 2 в ряд */
+    text-align: center;
   }
 
   .top-nav a {
-    font-size: 24px; /* Зменшено з 30px */
+    display: block;
+    font-size: 15px;         /* оптимально читабельно */
+    padding: 10px 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
   }
 
+  .top-nav a:hover,
+  .top-nav a:active {
+    background: rgba(255, 255, 255, 0.3);
+    color: white !important;
+  }
+
+  /* Відсуваємо весь контент нижче навігації (висота навігації ≈ 110-130px) */
   .page-container {
-    min-height: 100vh; /* Забезпечення повної висоти */
-    padding: 10px; /* Додаткові відступи для мобілки */
+    padding-top: 140px !important; /* 140px надійно покриває 2 ряди + відступи */
+    min-height: calc(100vh - 140px);
   }
 
+  /* Головні заголовки на головній сторінці */
+  .name-main {
+    font-size: 42px;
+    margin-top: 0.8em;
+  }
+
+  .subname-main {
+    font-size: 18px;
+  }
+
+  /* Фон на мобілці — без fixed attachment (економить ресурси) */
   .background-container {
-    background-attachment: scroll; /* Зміна на scroll для кращої продуктивності на мобілці */
+    background-attachment: scroll;
   }
 
-  .info-area {
-    width: 90%; /* Адаптація ширини до екрану */
-    font-size: 14px; /* Збільшено для читабельності, але адаптовано */
-  }
+  html, body {
+  overflow-y: auto !important; /* Перезаписуємо hidden для мобілки */
+}
 }

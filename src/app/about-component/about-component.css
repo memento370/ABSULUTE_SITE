@@ -99,15 +99,48 @@
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
+    margin: 0; /* Повноекранність */
+    padding: 0;
+    min-height: auto; /* Росте за контентом */
   }
 
+  /* Сайдбар як фіксоване горизонтальне меню зверху */
   .sidebar {
-    width: 100%;
-    height: auto;
+    display: none !important;
   }
 
+
+  /* Контент з прокручуванням по сторінці */
   .content {
+    width: 100%;
+    height: auto; /* Без фіксованої висоти — росте за текстом */
+    min-height: calc(100vh - 200px); /* Запас для футера/навбар */
+    overflow-y: visible; /* Прокручування на body */
+    padding: 80px 15px 40px; /* Верхній відступ під сайдбар (≈60px висота сайдбару) */
+    margin-top: 0; /* Без додаткового маржину */
+  }
+
+  .content-section {
+    padding-bottom: 20px;
+  }
+
+  .html-content {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .html-content img {
+    max-width: 100%;
     height: auto;
+    margin: 10px auto;
+    display: block;
+  }
+
+  /* Таблиці */
+  .custom-table {
+    font-size: 13px;
+    overflow-x: auto;
+    display: block;
   }
 }
 

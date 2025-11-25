@@ -41,21 +41,34 @@
   }
  
 
-  /* Медіа-запит для мобільних пристроїв */
+/* Мовна панель на мобілці — завжди розгорнута в рядок, над навігацією */
 @media (max-width: 768px) {
   .language-panel {
-    right: 10px; /* Зменшено відступ */
-    top: 40%; /* Легке коригування позиції */
-    height: 100px; /* Зменшено висоту в розгорнутому стані */
-    
-    &.collapsed {
-      height: 30px; /* Зменшено в згорнутому стані */
-    }
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    flex-direction: row;    /* горизонтально */
+    gap: 10px;
+    height: auto;
+    z-index: 1200;          /* вище за навігацію */
+    transition: none;
   }
 
-  .lang-btn {
-    width: 30px; /* Зменшено розмір кнопок */
-    height: 30px;
-    font-size: 12px; /* Зменшено шрифт */
+  /* Примусово показуємо всі 3 кнопки (ігноруємо collapsed) */
+  .language-panel.collapsed .lang-btn:not(:first-child),
+  .language-panel.collapsed button[ngClass] {
+    display: inline-block !important;
+  }
+
+  .language-panel .lang-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  /* Трохи затемнюємо активну мову */
+  .language-panel .lang-btn:active {
+    transform: scale(0.92);
   }
 }
