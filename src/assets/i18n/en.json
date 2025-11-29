@@ -198,5 +198,15 @@
     "about.buffer.mage_20_40_title": "Mage buffs: 20-40 level: ",
     "about.buffer.mage_20_40_buffs": "Wind Walk 2 lvl<br>Shield 1 lvl<br>Magic barrier 1 lvl<br>Regeneration 1 lvl<br>Life Cubic 1 lvl<br>Empower 2 lvl<br>Concentration 1 lvl<br>Acumen 2 lvl<br>Blessed soul 1 lvl<br>Bless Shield 1 lvl<br>Clarity 1 lvl",
     "about.buffer.mage_40_title": "Mage buffs: 40+ level: ",
-    "about.buffer.mage_40_buffs": "Wind Walk 2 lvl<br>Shield 2 lvl<br>Magic barrier 2 lvl<br>Regeneration 2 lvl<br>Empower 2 lvl<br>Concentration 2 lvl<br>Acumen 2 lvl<br>Blessed soul 2 lvl<br>Bless Shield 2 lvl<br>Clarity 1 lvl<br>Berserk 2 lvl<br>Song Of earth 1 lvl<br>Dance of the Mystic 1 lvl"
+    "about.buffer.mage_40_buffs": "Wind Walk 2 lvl<br>Shield 2 lvl<br>Magic barrier 2 lvl<br>Regeneration 2 lvl<br>Empower 2 lvl<br>Concentration 2 lvl<br>Acumen 2 lvl<br>Blessed soul 2 lvl<br>Bless Shield 2 lvl<br>Clarity 1 lvl<br>Berserk 2 lvl<br>Song Of earth 1 lvl<br>Dance of the Mystic 1 lvl",
+
+    "about.services.title": "Services",
+    "about.services.header": "Services",
+    "about.services.desc1": "A number of services have been activated on our server, and the donate shop has been redesigned towards a completely non-donate concept. Service NPCs are located in the main cities (list will be specified later).",
+    "about.services.auction": "Server-wide Auction is enabled. You can list items from D-grade and above, including those augmented with Life-Stone.",
+    "about.services.finder": "Trader search service is enabled in certain cities (list will be specified later).",
+    "about.services.donate": "Donate-Shop is enabled. All prices are now in ADENA!",
+    "about.services.prices1": "Nickname/title color change, gender change, character rename — 5,000,000 adena.",
+    "about.services.prices2": "Accessorities — 1,000,000 adena.",
+    "about.services.concept": "This is part of the server's non-donate concept and will be further expanded in the future."
 }

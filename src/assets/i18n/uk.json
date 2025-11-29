@@ -201,5 +201,17 @@
     "about.buffer.mage_20_40_title": "Баффи магів : 20-40 рівень : ",
     "about.buffer.mage_20_40_buffs": "Wind Walk 2 lvl<br>Shield 1 lvl<br>Magic barrier 1 lvl<br>Regeneration 1 lvl<br>Life Cubic 1 lvl<br>Empower 2 lvl<br>Concentration 1 lvl<br>Acumen 2 lvl<br>Blessed soul 1 lvl<br>Bless Shield 1 lvl<br>Clarity 1 lvl",
     "about.buffer.mage_40_title": "Баффи магів : 40+ рівень : ",
-    "about.buffer.mage_40_buffs": "Wind Walk 2 lvl<br>Shield 2 lvl<br>Magic barrier 2 lvl<br>Regeneration 2 lvl<br>Empower 2 lvl<br>Concentration 2 lvl<br>Acumen 2 lvl<br>Blessed soul 2 lvl<br>Bless Shield 2 lvl<br>Clarity 1 lvl<br>Berserk 2 lvl<br>Song Of earth 1 lvl<br>Dance of the Mystic 1 lvl"
+    "about.buffer.mage_40_buffs": "Wind Walk 2 lvl<br>Shield 2 lvl<br>Magic barrier 2 lvl<br>Regeneration 2 lvl<br>Empower 2 lvl<br>Concentration 2 lvl<br>Acumen 2 lvl<br>Blessed soul 2 lvl<br>Bless Shield 2 lvl<br>Clarity 1 lvl<br>Berserk 2 lvl<br>Song Of earth 1 lvl<br>Dance of the Mystic 1 lvl",
+
+    "about.services.title": "Сервіси",
+    "about.services.header": "Сервіси",
+    "about.services.desc1": "На нашому сервері було активовано ряд сервісів, а також змінено donate shop в бік бездонатної концепції. NPC цих сервісів розташовані в основних містах (список буде уточнено пізніше).",
+    "about.services.auction": "Увімкнено загальносерверний Аукціон. Можна виставляти предмети від D-grade та вище, включно з аугментованими за допомогою Life-Stone.",
+    "about.services.finder": "Увімкнено сервіс пошуку по торгівцям у певних містах (список буде уточнено пізніше).",
+    "about.services.donate": "Увімкнено Donate-Shop. Всі ціни переведено в АДЕНУ!",
+    "about.services.prices1": "Зміна кольору нікнейму/титулу, зміна статі, перейменування персонажа — 5 000 000 адени.",
+    "about.services.prices2": "Прикраси — 1 000 000 адени.",
+    "about.services.concept": "Це частина бездонатної концепції серверу й буде надалі розширюватися."
+
+
 }

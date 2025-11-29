@@ -118,6 +118,24 @@ export class AboutComponent {
         `
       },
       {
+        title: this.translate.instant('about.services.title'),
+        html: `
+          <b><h1 class="text-center">${this.translate.instant('about.services.header')}</h1></b><br>
+          <h3>${this.translate.instant('about.services.desc1')}</h3>
+          <h3>${this.translate.instant('about.services.auction')}</h3>
+          <img src="/assets/image/service/service_auction.png" alt="service_auc">
+          
+          <h3>${this.translate.instant('about.services.finder')}</h3>
+          <img src="/assets/image/service/service_finder.png" alt="service_finder">
+
+          <h3>${this.translate.instant('about.services.donate')}</h3>
+          <h3>${this.translate.instant('about.services.prices1')}</h3>
+          <h3>${this.translate.instant('about.services.prices2')}</h3>
+          <h3>${this.translate.instant('about.services.concept')}</h3>
+          <img src="/assets/image/service/service_donate.png" alt="service_donate">
+        `
+      },
+      {
         title: this.translate.instant('about.rift.title'),
         html: `
           <b><h1 class="text-center">${this.translate.instant('about.rift.header')}</h1></b><br>
