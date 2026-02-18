@@ -1,124 +1,316 @@
-.registration-form {
-    width: 300px;
-    margin: 10em auto;
-    margin-top: 0em;
-    background: rgba(0, 0, 0, 0.5); /* Чорний колір із прозорістю 80% */
-    padding: 20px;
-    border-radius: 10px; /* Закруглені кути */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Тінь */
-    color: #fff; /* Білий текст */
-    font-family: Arial, sans-serif; /* Шрифт */
-  }
-  
-  .form-group {
-    margin-bottom: 15px; /* Відступ між групами елементів */
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #fff; /* Білий текст */
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Напівпрозорі межі */
-    background: rgba(255, 255, 255, 0.1); /* Легкий прозорий фон */
-    color: #fff; /* Білий текст */
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .form-control:focus {
-    border-color: #007bff; /* Синій колір при фокусі */
-    outline: none;
-    background: rgba(255, 255, 255, 0.2); /* Трохи яскравіший фон при фокусі */
-  }
-  
-  .btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    color: #fff; /* Білий текст */
-    background-color: #007bff; /* Синя кнопка */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Плавний ефект */
-    margin-bottom : 1em;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3; /* Темно-синій колір при наведенні */
-  }
-  
-  .btn:active {
-    background-color: #004080; /* Темніший колір при натисканні */
-  }
-  select.form-control {
-    color: white;           /* Чорний текст */
-  }
-  
-  /* Задаємо для пунктів списку (option) чорний текст */
-  select.form-control option {
-    color: #000;           /* Чорний текст */
-    background-color: #fff; /* Білий фон */
-  }
-
-.divider {
-  height: 1px;
-  margin: 18px 0;
-  background: rgba(255, 255, 255, 0.15);
+/* ====== Page layout ====== */
+.cabinet-page {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
 
-.hint {
+/* ====== Login ====== */
+.login-wrap {
+  min-height: calc(100vh - 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 360px;
+  max-width: 92vw;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+}
+
+.login-title {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.name-main { margin: 0; }
+.subname-main { margin: 6px 0 0; opacity: 0.85; }
+
+/* ====== Cabinet shell ====== */
+.cabinet-shell {
+  width: 100%;
+  min-height: calc(100vh - 48px);
+  background: rgba(0, 0, 0, 0.50);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+  overflow: hidden;
+}
+
+/* Header */
+.cabinet-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.25);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cabinet-brand .brand-title {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.cabinet-brand .brand-sub {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-pill {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  min-width: 150px;
+  text-align: right;
+}
+.user-pill__login { font-weight: 700; }
+.user-pill__role { font-size: 12px; opacity: 0.85; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
   font-size: 13px;
-  line-height: 1.4;
-  opacity: 0.9;
+}
+
+.tab-btn:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+.tab-btn.active {
+  background: rgba(0, 123, 255, 0.35);
+  border-color: rgba(0, 123, 255, 0.55);
+}
+
+/* Body */
+.cabinet-body {
+  padding: 18px;
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 700;
   margin-bottom: 12px;
 }
 
-.btn-secondary {
-  background-color: #6c757d;
+/* Grid/cards */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
 }
 
-.btn-secondary:hover {
-  background-color: #5a6268;
+.grid-2 {
+  grid-template-columns: 360px 1fr;
 }
+
+.card {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.card-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.muted { opacity: 0.85; font-size: 12px; }
+
+/* Key-value */
+.kv {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.kv:last-child { border-bottom: none; }
+
+.k { opacity: 0.85; }
+.v { font-weight: 700; }
+
+/* Characters list */
+.char-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.char-item {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.char-item:hover { background: rgba(255,255,255,0.10); }
+.char-item.active {
+  background: rgba(0, 123, 255, 0.30);
+  border-color: rgba(0, 123, 255, 0.55);
+}
+
+.char-name { font-weight: 700; }
+.char-meta { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+
+.empty {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px dashed rgba(255,255,255,0.18);
+  opacity: 0.9;
+}
+
+/* Details */
+.char-details .detail-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.char-details .detail-row:last-child { border-bottom: none; }
+
+/* Forms / controls */
+.form-group { margin-bottom: 12px; }
+
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: rgba(0,123,255,0.8);
+  outline: none;
+  background: rgba(255,255,255,0.12);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-top: 10px;
+}
+
+.btn.primary {
+  background: #007bff;
+  color: #fff;
+}
+.btn.primary:hover { background: #0056b3; }
+
+.btn.secondary {
+  background: #6c757d;
+  color: #fff;
+}
+.btn.secondary:hover { background: #5a6268; }
+
+.btn.ghost {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #fff;
+}
+.btn.ghost:hover { background: rgba(255,255,255,0.12); }
 
 .btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
-  /* Медіа-запит для мобільних пристроїв */
-@media (max-width: 768px) {
-  .registration-form {
-    width: 90%;
-    margin: 5em auto 0 auto;
-    padding: 15px;
-  }
 
-  .form-group {
-    margin-bottom: 10px;
-  }
-
-  .form-control {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .btn {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  select.form-control {
-    font-size: 12px;
-  }
-
-
-
+/* Hint text */
+.hint {
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.9;
+  margin: 6px 0 10px;
 }
+
+/* ====== Responsive ====== */
+@media (max-width: 992px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .user-pill {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .cabinet-page { padding: 12px; }
+  .cabinet-body { padding: 12px; }
+
+  .cabinet-header {
+    padding: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-right {
+    justify-content: space-between;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 8px 9px;
+  }
+
+  .kv, .char-details .detail-row {
+    grid-template-columns: 1fr;
+  }
+}
+ 

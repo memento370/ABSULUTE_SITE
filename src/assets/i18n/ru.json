@@ -67,6 +67,36 @@
     "cabinet.changeEmail.cancel": "Отмена",
     "cabinet.changeEmail.startChangeEmail": "Изменить email",
     "cabinet.exit": "Выход",
+    "cabinet.tabs.info": "Информация об аккаунте",
+    "cabinet.tabs.characters": "Персонажи",
+    "cabinet.tabs.security": "Безопасность",
+
+    "cabinet.section.info": "Информация",
+    "cabinet.section.characters": "Персонажи",
+    "cabinet.section.security": "Безопасность",
+
+    "cabinet.card.account": "Аккаунт",
+    "cabinet.field.login": "Логин",
+    "cabinet.field.email": "Email",
+    "cabinet.field.role": "Роль",
+    "cabinet.field.language": "Язык",
+    "cabinet.field.sessionLeft": "Сессия действительна ещё",
+
+    "cabinet.card.list": "Список",
+    "cabinet.card.details": "Детали",
+    "cabinet.card.actions": "Действия",
+    "cabinet.card.session": "Сессия",
+
+    "cabinet.characters.loading": "загрузка...",
+    "cabinet.characters.selectHint": "Выберите персонажа из списка.",
+    "cabinet.characters.levelShort": "Ур.",
+
+    "cabinet.actions.refreshCharacters": "Обновить список персонажей",
+
+    "cabinet.common.loadingDots": "...",
+    "cabinet.common.dash": "—",
+    "cabinet.minutes": "Мин",
+    "cabinet.less_one_minute": "меньше минуты",
     
     "about.short.header": "Краткое описание сервера",
     "about.short.desc1": "Бездонатный сервер Lineage 2 Interlude на клиенте Classic. Основной акцент сервера x10 сосредоточен на аутентичности хроник Interlude для лучшего игрового опыта наших игроков. Для администрации сервера главное в первую очередь создать комфортную атмосферу для игры, в которой будет полностью отсутствовать концепция \"PAY2WIN\", зарплатных кланов, несправедливого отношения администрации к игроку. Это наш первый запуск, поэтому описание сервера может изменяться или дополняться.",

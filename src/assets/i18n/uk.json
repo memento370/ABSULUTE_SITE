@@ -66,6 +66,37 @@
     "cabinet.changeEmail.cancel": "Скасувати",
     "cabinet.changeEmail.startChangeEmail": "Змінити email",
     "cabinet.exit": "Вихід",
+    "cabinet.tabs.info": "Інформація про акаунт",
+    "cabinet.tabs.characters": "Персонажі",
+    "cabinet.tabs.security": "Безпека",
+
+    "cabinet.section.info": "Інформація",
+    "cabinet.section.characters": "Персонажі",
+    "cabinet.section.security": "Безпека",
+
+    "cabinet.card.account": "Акаунт",
+    "cabinet.field.login": "Логін",
+    "cabinet.field.email": "Email",
+    "cabinet.field.role": "Роль",
+    "cabinet.field.language": "Мова",
+    "cabinet.field.sessionLeft": "Сесія дійсна ще",
+
+    "cabinet.card.list": "Список",
+    "cabinet.card.details": "Деталі",
+    "cabinet.card.actions": "Дії",
+    "cabinet.card.session": "Сесія",
+
+    "cabinet.characters.loading": "завантаження...",
+    "cabinet.characters.selectHint": "Оберіть персонажа зі списку.",
+    "cabinet.characters.levelShort": "Рів.",
+
+    "cabinet.actions.refreshCharacters": "Оновити список персонажів",
+
+    "cabinet.common.loadingDots": "...",
+    "cabinet.common.dash": "—",
+    "cabinet.minutes": "хв",
+    "cabinet.less_one_minute": "менше хвилини",
+
 
 
     

@@ -65,6 +65,36 @@
     "cabinet.changeEmail.cancel": "Cancel",
     "cabinet.changeEmail.startChangeEmail": "Change email",
     "cabinet.exit": "Logout",
+     "cabinet.tabs.info": "Account info",
+    "cabinet.tabs.characters": "Characters",
+    "cabinet.tabs.security": "Security",
+
+    "cabinet.section.info": "Information",
+    "cabinet.section.characters": "Characters",
+    "cabinet.section.security": "Security",
+
+    "cabinet.card.account": "Account",
+    "cabinet.field.login": "Login",
+    "cabinet.field.email": "Email",
+    "cabinet.field.role": "Role",
+    "cabinet.field.language": "Language",
+    "cabinet.field.sessionLeft": "Session expires in",
+
+    "cabinet.card.list": "List",
+    "cabinet.card.details": "Details",
+    "cabinet.card.actions": "Actions",
+    "cabinet.card.session": "Session",
+
+    "cabinet.characters.loading": "loading...",
+    "cabinet.characters.selectHint": "Select a character from the list.",
+    "cabinet.characters.levelShort": "Lv.",
+
+    "cabinet.actions.refreshCharacters": "Refresh character list",
+
+    "cabinet.common.loadingDots": "...",
+    "cabinet.common.dash": "—",
+    "cabinet.minutes": "Min",
+    "cabinet.less_one_minute": "less than a minute",
 
 
     "about.short.title": "Short Description",

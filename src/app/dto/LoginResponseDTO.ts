@@ -3,4 +3,5 @@ export interface LoginResponseDTO {
   role: string;
   login:string;
   message: string;
+  l2email: string;
 }
