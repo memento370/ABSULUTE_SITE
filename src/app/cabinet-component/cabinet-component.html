@@ -47,37 +47,71 @@
   <ng-template #emailChangeBlock>
     <div>
       <p class="hint" *ngIf="!emailCodeSent">
-        Натисніть кнопку нижче — ми надішлемо код підтвердження на ваш поточний (старий) e-mail.
-        Потім введіть новий e-mail і код.
+        {{ 'cabinet.changeEmail.hint' | translate }}
       </p>
 
-      <button class="btn" type="button" (click)="requestEmailChangeCode()" [disabled]="emailChangeLoading" *ngIf="!emailCodeSent">
-        {{ emailChangeLoading ? 'Надсилаємо...' : 'Надіслати код на старий e-mail' }}
+      <button
+        class="btn"
+        type="button"
+        (click)="requestEmailChangeCode()"
+        [disabled]="emailChangeLoading"
+        *ngIf="!emailCodeSent"
+      >
+        {{ (emailChangeLoading ? 'cabinet.changeEmail.sending' : 'cabinet.changeEmail.sendCode') | translate }}
       </button>
+
       <div *ngIf="emailCodeSent">
         <div class="form-group">
-          <label>Новий e-mail</label>
-          <input type="email" class="form-control" [(ngModel)]="emailChangeConfirmDTO.newEmail" name="newEmail" placeholder="Введіть новий e-mail" [disabled]="emailChangeLoading"/>
+          <label>{{ 'cabinet.changeEmail.newEmailLabel' | translate }}</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="emailChangeConfirmDTO.newEmail"
+            name="newEmail"
+            [placeholder]="'cabinet.changeEmail.newEmailPlaceholder' | translate"
+            [disabled]="emailChangeLoading"
+          />
         </div>
 
         <div class="form-group">
-          <label>Код підтвердження</label>
-          <input type="text" class="form-control" [(ngModel)]="emailChangeConfirmDTO.code" name="emailChangeCode" placeholder="Введіть код з листа" [disabled]="emailChangeLoading"/>
+          <label>{{ 'cabinet.changeEmail.codeLabel' | translate }}</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="emailChangeConfirmDTO.code"
+            name="emailChangeCode"
+            [placeholder]="'cabinet.changeEmail.codePlaceholder' | translate"
+            [disabled]="emailChangeLoading"
+          />
         </div>
 
         <button class="btn" type="button" (click)="confirmEmailChange()" [disabled]="emailChangeLoading">
-          {{ emailChangeLoading ? 'Перевіряємо...' : 'Підтвердити зміну e-mail' }}
+          {{ (emailChangeLoading ? 'cabinet.changeEmail.checking' : 'cabinet.changeEmail.confirm') | translate }}
         </button>
 
-        <button class="btn" type="button" (click)="requestEmailChangeCode()" [disabled]="emailChangeLoading" style="margin-top: 10px;">
-          Надіслати код ще раз
+        <button
+          class="btn"
+          type="button"
+          (click)="requestEmailChangeCode()"
+          [disabled]="emailChangeLoading"
+          style="margin-top: 10px;"
+        >
+          {{ 'cabinet.changeEmail.resend' | translate }}
         </button>
       </div>
-      <button class="btn btn-secondary" type="button" (click)="toggleEmailChange()" [disabled]="emailChangeLoading" style="margin-top: 10px;">
-        Скасувати
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="toggleEmailChange()"
+        [disabled]="emailChangeLoading"
+        style="margin-top: 10px;"
+      >
+        {{ 'cabinet.changeEmail.cancel' | translate }}
       </button>
     </div>
   </ng-template>
+
   <button class="btn" (click)="logout()">Выход</button>
 </div>
 

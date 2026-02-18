@@ -53,6 +53,19 @@
     "cabinet_lvl":"Рівень",
     "cabinet_class":"Класс",
     "cabinet_sys_get_character_succes":"Персонажі отримані успішно",
+    "cabinet.changeEmail.hint": "Натисніть кнопку нижче — ми надішлемо код підтвердження на ваш поточний (старий) e-mail. Потім введіть новий e-mail і код.",
+    "cabinet.changeEmail.sendCode": "Надіслати код на старий e-mail",
+    "cabinet.changeEmail.sending": "Надсилаємо...",
+    "cabinet.changeEmail.newEmailLabel": "Новий e-mail",
+    "cabinet.changeEmail.newEmailPlaceholder": "Введіть новий e-mail",
+    "cabinet.changeEmail.codeLabel": "Код підтвердження",
+    "cabinet.changeEmail.codePlaceholder": "Введіть код з листа",
+    "cabinet.changeEmail.confirm": "Підтвердити зміну e-mail",
+    "cabinet.changeEmail.checking": "Перевіряємо...",
+    "cabinet.changeEmail.resend": "Надіслати код ще раз",
+    "cabinet.changeEmail.cancel": "Скасувати",
+    "cabinet.changeEmail.startChangeEmail": "Змінити email",
+    "cabinet.exit": "Вихід",
 
 
     
@@ -212,6 +225,6 @@
     "about.services.prices1": "Зміна кольору нікнейму/титулу, зміна статі, перейменування персонажа — 5 000 000 адени.",
     "about.services.prices2": "Прикраси — 1 000 000 адени.",
     "about.services.concept": "Це частина бездонатної концепції серверу й буде надалі розширюватися."
-
+ 
 
 }

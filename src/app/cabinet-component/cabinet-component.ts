@@ -167,11 +167,11 @@ export class CabinetComponent {
       ).subscribe({
         next: (msg: string) => {
           this.emailCodeSent = true;
-          this.toastr.success(msg || 'Код надіслано на старий e-mail.', 'Успіх');
+          this.toastr.success(msg, this.translate.instant('register_sys_succes'));
           this.emailChangeLoading = false;
         },
         error: (err) => {
-          this.toastr.error(err?.error || 'Не вдалося надіслати код.', 'Помилка');
+          this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
           this.emailChangeLoading = false;
         }
       });
@@ -179,14 +179,6 @@ export class CabinetComponent {
 
     confirmEmailChange() {
       if (this.emailChangeLoading) return;
-      if (!this.emailChangeConfirmDTO.newEmail.trim()) {
-        this.toastr.error('Введіть новий e-mail.', 'Помилка');
-        return;
-      }
-      if (!this.emailChangeConfirmDTO.code.trim()) {
-        this.toastr.error('Введіть код підтвердження.', 'Помилка');
-        return;
-      }
       this.emailChangeLoading = true;
       const body = {
         newEmail: this.emailChangeConfirmDTO.newEmail.trim(),
@@ -198,13 +190,13 @@ export class CabinetComponent {
         { headers: { ...this.getAuthHeaders(), 'Content-Type': 'application/json' }, responseType: 'text' }
       ).subscribe({
         next: (msg: string) => {
-          this.toastr.success(msg || 'E-mail успішно змінено.', 'Успіх');
+          this.toastr.success(msg, this.translate.instant('register_sys_succes'));
           this.resetEmailChangeForm();
           this.isEmailChangeOpen = false;
           this.emailChangeLoading = false;
         },
         error: (err) => {
-          this.toastr.error(err?.error || 'Не вдалося змінити e-mail.', 'Помилка');
+          this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
           this.emailChangeLoading = false;
         }
       });
