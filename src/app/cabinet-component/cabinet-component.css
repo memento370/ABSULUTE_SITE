@@ -48,6 +48,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Плавний ефект */
+    margin-bottom : 1em;
   }
   
   .btn:hover {
@@ -66,7 +67,32 @@
     color: #000;           /* Чорний текст */
     background-color: #fff; /* Білий фон */
   }
-  
+
+.divider {
+  height: 1px;
+  margin: 18px 0;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.hint {
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
   /* Медіа-запит для мобільних пристроїв */
 @media (max-width: 768px) {
   .registration-form {
@@ -92,4 +118,7 @@
   select.form-control {
     font-size: 12px;
   }
+
+
+
 }

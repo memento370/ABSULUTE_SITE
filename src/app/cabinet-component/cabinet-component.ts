@@ -4,24 +4,12 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { concatMap, Observable, Subscription, switchMap } from 'rxjs';
+import { CharacterDTO } from '../dto/CharacterDTO';
+import { LoginResponseDTO } from '../dto/LoginResponseDTO';
+import { EmailChangeConfirmDTO } from '../dto/EmailChangeConfirmDTO';
+import { LoginRequestDTO } from '../dto/LoginRequestDTO';
 
-export interface LoginResponse {
-  token: string;
-  role: string;
-  login:string;
-  message: string;
-}
-export interface CharacterDTO {
-  objId: number;
-  accountName: string;
-  charName: string;
-  baseClassId: number;
-  raceEn: string;
-  raceRu: string;
-  classEn: string;
-  classRu: string;
-  lvl: number;
-}
+
 
 @Component({
   selector: 'cabinet-component',
@@ -34,8 +22,6 @@ export interface CharacterDTO {
 export class CabinetComponent {
 
     l2email: string = '';
-    login: string = '';
-    password: string = '';
     confirmPassword: string = '';
     verificationCode: string = '';
     isCodeSent: boolean = false;
@@ -46,6 +32,20 @@ export class CabinetComponent {
     selectedCharacter: CharacterDTO | null = null;
     currentLanguage: string = ''; 
     private langChangeSubscription: Subscription | undefined;
+
+    isEmailChangeOpen: boolean = false;
+
+    emailChangeConfirmDTO : EmailChangeConfirmDTO = {
+      newEmail : '',
+      code : ''
+    }
+    loginRequestDTO : LoginRequestDTO = {
+      login : '',
+      password : ''
+    }
+    emailCodeSent: boolean = false;
+    emailChangeLoading: boolean = false;
+
     constructor(
         private http: HttpClient,
         private toastr: ToastrService,
@@ -82,13 +82,13 @@ export class CabinetComponent {
         }
     onSubmit() {
       const account = {
-        login: this.login,
-        password: this.password
-      };
+        login: this.loginRequestDTO.login,
+        password: this.loginRequestDTO.password
+      }; 
       const headers = { 'Accept-Language': this.currentLanguage };
-      this.http.post<LoginResponse>('https://l2-absolute.com/api/site/accounts/login', account,{ headers })
+      this.http.post<LoginResponseDTO>('https://l2-absolute.com/api/site/accounts/login', account,{ headers })
         .subscribe({
-          next: (res: LoginResponse) => {
+          next: (res: LoginResponseDTO) => {
             this.toastr.success(res.message, this.translate.instant('register_sys_succes'));
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
@@ -133,8 +133,80 @@ export class CabinetComponent {
       localStorage.removeItem('role');
       localStorage.removeItem('login');
       this.autentification = false;
-      this.router.navigate(['/login']);
     }
 
+    private getAuthHeaders() {
+      const token = localStorage.getItem('token') || '';
+      return {
+        'Authorization': `Bearer ${token}`,
+        'Accept-Language': this.currentLanguage || 'uk'
+      };
+    }
 
+    toggleEmailChange() {
+      this.isEmailChangeOpen = !this.isEmailChangeOpen;
+      if (!this.isEmailChangeOpen) {
+        this.resetEmailChangeForm();
+      }
+    }
+
+    private resetEmailChangeForm() {
+      this.emailChangeConfirmDTO.newEmail = '';
+      this.emailChangeConfirmDTO.code = '';
+      this.emailCodeSent = false;
+      this.emailChangeLoading = false;
+    }
+
+    requestEmailChangeCode() {
+      if (this.emailChangeLoading) return;
+      this.emailChangeLoading = true;
+      this.http.post(
+        'https://l2-absolute.com/api/site/accounts/email-change/request',
+        null,
+        { headers: this.getAuthHeaders(), responseType: 'text' }
+      ).subscribe({
+        next: (msg: string) => {
+          this.emailCodeSent = true;
+          this.toastr.success(msg || 'Код надіслано на старий e-mail.', 'Успіх');
+          this.emailChangeLoading = false;
+        },
+        error: (err) => {
+          this.toastr.error(err?.error || 'Не вдалося надіслати код.', 'Помилка');
+          this.emailChangeLoading = false;
+        }
+      });
+    }
+
+    confirmEmailChange() {
+      if (this.emailChangeLoading) return;
+      if (!this.emailChangeConfirmDTO.newEmail.trim()) {
+        this.toastr.error('Введіть новий e-mail.', 'Помилка');
+        return;
+      }
+      if (!this.emailChangeConfirmDTO.code.trim()) {
+        this.toastr.error('Введіть код підтвердження.', 'Помилка');
+        return;
+      }
+      this.emailChangeLoading = true;
+      const body = {
+        newEmail: this.emailChangeConfirmDTO.newEmail.trim(),
+        code: this.emailChangeConfirmDTO.code.trim()
+      };
+      this.http.post(
+        'https://l2-absolute.com/api/site/accounts/email-change/confirm',
+        body,
+        { headers: { ...this.getAuthHeaders(), 'Content-Type': 'application/json' }, responseType: 'text' }
+      ).subscribe({
+        next: (msg: string) => {
+          this.toastr.success(msg || 'E-mail успішно змінено.', 'Успіх');
+          this.resetEmailChangeForm();
+          this.isEmailChangeOpen = false;
+          this.emailChangeLoading = false;
+        },
+        error: (err) => {
+          this.toastr.error(err?.error || 'Не вдалося змінити e-mail.', 'Помилка');
+          this.emailChangeLoading = false;
+        }
+      });
+    }
 }
