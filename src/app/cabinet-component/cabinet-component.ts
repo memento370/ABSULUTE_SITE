@@ -18,10 +18,10 @@ type CabinetTab = 'info' | 'characters' | 'security';
   styleUrl: './cabinet-component.css'
 })
 export class CabinetComponent {
-  // private readonly SITE_API = 'https://l2-absolute.com/api/site/accounts';
-  // private readonly SERVER_API = 'https://l2-absolute.com/api/server/accounts';
-  private readonly SITE_API = 'http://localhost:8080/api/site/accounts';
-  private readonly SERVER_API = 'http://localhost:8080/api/server/accounts';
+  private readonly SITE_API = 'https://l2-absolute.com/api/site/accounts';
+  private readonly SERVER_API = 'https://l2-absolute.com/api/server/accounts';
+  // private readonly SITE_API = 'http://localhost:8080/api/site/accounts';
+  // private readonly SERVER_API = 'http://localhost:8080/api/server/accounts';
 
   activeTab: CabinetTab = 'info';
 
