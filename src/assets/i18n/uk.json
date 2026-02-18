@@ -96,10 +96,46 @@
     "cabinet.common.dash": "—",
     "cabinet.minutes": "хв",
     "cabinet.less_one_minute": "менше хвилини",
+    "cabinet.changeLogin.title": "Зміна логіну",
 
+    "cabinet.loginRemind.title": "Нагадати логін",
+    "cabinet.loginRemind.hint": "Натисніть кнопку нижче — ми надішлемо ваш логін на поточний e-mail акаунта.",
+    "cabinet.loginRemind.send": "Надіслати логін на e-mail",
+    "cabinet.loginRemind.sending": "Надсилаємо...",
 
+    "cabinet.changePassword.title": "Зміна пароля",
+    "cabinet.changePassword.hint": "Натисніть кнопку нижче — ми надішлемо код підтвердження на ваш поточний e-mail. Потім введіть новий пароль і код.",
+    "cabinet.changePassword.sendCode": "Надіслати код на e-mail",
+    "cabinet.changePassword.sending": "Надсилаємо...",
+    "cabinet.changePassword.newPasswordLabel": "Новий пароль",
+    "cabinet.changePassword.newPasswordPlaceholder": "Введіть новий пароль",
+    "cabinet.changePassword.codeLabel": "Код підтвердження",
+    "cabinet.changePassword.codePlaceholder": "Введіть код з листа",
+    "cabinet.changePassword.confirm": "Підтвердити зміну пароля",
+    "cabinet.changePassword.checking": "Перевіряємо...",
+    "cabinet.changePassword.resend": "Надіслати код ще раз",
+    "cabinet.changePassword.cancel": "Скасувати",
+    "cabinet.forgotPassword.open": "Забули пароль?",
+    "cabinet.forgotPassword.backToLogin": "Назад до входу",
 
-    
+    "cabinet.forgotPassword.emailLabel": "E-mail",
+    "cabinet.forgotPassword.emailPlaceholder": "Введіть e-mail",
+    "cabinet.forgotPassword.sendCode": "Надіслати код",
+    "cabinet.forgotPassword.resend": "Надіслати код ще раз",
+
+    "cabinet.forgotPassword.hint": "Ми надіслали код підтвердження на вашу пошту. Введіть код і новий пароль.",
+
+    "cabinet.forgotPassword.codeLabel": "Код підтвердження",
+    "cabinet.forgotPassword.codePlaceholder": "Введіть код з листа",
+
+    "cabinet.forgotPassword.newPasswordLabel": "Новий пароль",
+    "cabinet.forgotPassword.newPasswordPlaceholder": "Введіть новий пароль",
+
+    "cabinet.forgotPassword.confirm": "Підтвердити зміну пароля",
+
+    "cabinet.forgotPassword.emailRequired": "Вкажіть e-mail.",
+    "cabinet.forgotPassword.fieldsRequired": "Заповніть e-mail, код та новий пароль.",
+
     "about.short.title": "Короткий опис",
     "about.short.header": "Короткий опис серверу",
     "about.short.desc1": "Бездонатний сервер Lineage 2 Interlude , на клієнті Classic. Основний акцент серверу х10 сконцентровано на автентичності хронік Interlude , задля найкращого ігрового досвіду наших гравців.Для адміністрації серверу головне в першу чергу створити комфортну атмосферу для гри, в якій буде повністю відсутня концепція \"PAY2WIN\",зарплатних кланів,не справедливого відношення адміністрації до гравця. Це наш перший запуск,тому опис серверу може змінюватися,або доповнюватися.",

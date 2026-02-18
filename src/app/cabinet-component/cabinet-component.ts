@@ -18,10 +18,10 @@ type CabinetTab = 'info' | 'characters' | 'security';
   styleUrl: './cabinet-component.css'
 })
 export class CabinetComponent {
-  private readonly SITE_API = 'https://l2-absolute.com/api/site/accounts';
-  private readonly SERVER_API = 'https://l2-absolute.com/api/server/accounts';
-  // private readonly SITE_API = 'http://localhost:8080/api/site/accounts';
-  // private readonly SERVER_API = 'http://localhost:8080/api/server/accounts';
+  // private readonly SITE_API = 'https://l2-absolute.com/api/site/accounts';
+  // private readonly SERVER_API = 'https://l2-absolute.com/api/server/accounts';
+  private readonly SITE_API = 'http://localhost:8080/api/site/accounts';
+  private readonly SERVER_API = 'http://localhost:8080/api/server/accounts';
 
   activeTab: CabinetTab = 'info';
 
@@ -41,6 +41,20 @@ export class CabinetComponent {
   emailCodeSent = false;
   emailChangeLoading = false;
 
+  // ====== Password change ======
+  passwordChangeConfirmDTO = { newPassword: '', code: '' };
+  passwordCodeSent = false;
+  passwordChangeLoading = false;
+
+  loginRemindLoading = false;
+
+  // ===== Forgot password (reset by email) =====
+  forgotPasswordOpen = false;
+  forgotCodeSent = false;
+  forgotLoading = false;
+
+  forgotPasswordEmail = '';
+  forgotPasswordConfirmDTO = { code: '', newPassword: '' };
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
@@ -61,16 +75,10 @@ export class CabinetComponent {
     this.langSub?.unsubscribe();
   }
 
-  // =========================
-  // Tabs
-  // =========================
   setTab(tab: CabinetTab) {
     this.activeTab = tab;
   }
 
-  // =========================
-  // Session / Auth
-  // =========================
   private restoreSession() {
     const loginTime = localStorage.getItem('loginTime');
     const token = localStorage.getItem('token');
@@ -87,13 +95,11 @@ export class CabinetComponent {
       this.clearSession();
       return;
     }
-
     this.autentification = true;
     this.loginAut = localStorage.getItem('login');
     this.roleAut = localStorage.getItem('role');
+    this.l2email = localStorage.getItem('l2email');
     this.activeTab = 'info';
-
-    // одразу підтягуємо персонажів
     this.onGetCharacters();
   }
 
@@ -102,6 +108,7 @@ export class CabinetComponent {
     localStorage.removeItem('role');
     localStorage.removeItem('login');
     localStorage.removeItem('loginTime');
+    localStorage.removeItem('l2email');
 
     this.autentification = false;
     this.loginAut = null;
@@ -276,18 +283,187 @@ export class CabinetComponent {
     this.resetEmailChangeForm();
   }
 
-getSessionExpiresText(): string {
-  const loginTimeStr = localStorage.getItem('loginTime');
-  if (!loginTimeStr) return '—';
+  getSessionExpiresText(): string {
+    const loginTimeStr = localStorage.getItem('loginTime');
+    if (!loginTimeStr) return '—';
 
-  const loginTime = Number(loginTimeStr);
-  if (!Number.isFinite(loginTime)) return '—';
+    const loginTime = Number(loginTimeStr);
+    if (!Number.isFinite(loginTime)) return '—';
 
-  const expiresAt = loginTime + (3600 * 1000);
-  const msLeft = expiresAt - Date.now();
-  if (msLeft <= 0) return '—';
+    const expiresAt = loginTime + (3600 * 1000);
+    const msLeft = expiresAt - Date.now();
+    if (msLeft <= 0) return '—';
 
-  const minutesLeft = Math.floor(msLeft / 60000);
-  return minutesLeft > 0 ? `${minutesLeft} ${this.translate.instant('cabinet.minutes')}` : this.translate.instant('cabinet.less_one_minute');
+    const minutesLeft = Math.floor(msLeft / 60000);
+    return minutesLeft > 0 ? `${minutesLeft} ${this.translate.instant('cabinet.minutes')}` : this.translate.instant('cabinet.less_one_minute');
+  }
+
+  private resetPasswordChangeForm() {
+    this.passwordChangeConfirmDTO.newPassword = '';
+    this.passwordChangeConfirmDTO.code = '';
+    this.passwordCodeSent = false;
+    this.passwordChangeLoading = false;
+  }
+
+requestPasswordChangeCode() {
+  if (this.passwordChangeLoading) return;
+
+  this.passwordChangeLoading = true;
+
+  this.http.post(
+    `${this.SITE_API}/password-change/request`,
+    null,
+    { headers: this.getAuthHeaders(), responseType: 'text' }
+  ).subscribe({
+    next: (msg: string) => {
+      this.passwordCodeSent = true;
+      this.toastr.success(msg, this.translate.instant('register_sys_succes'));
+      this.passwordChangeLoading = false;
+    },
+    error: (err) => {
+      this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
+      this.passwordChangeLoading = false;
+    }
+  });
+}
+
+confirmPasswordChange() {
+  if (this.passwordChangeLoading) return;
+
+  this.passwordChangeLoading = true;
+
+  const body = {
+    newPassword: this.passwordChangeConfirmDTO.newPassword.trim(),
+    code: this.passwordChangeConfirmDTO.code.trim()
+  };
+
+  this.http.post(
+    `${this.SITE_API}/password-change/confirm`,
+    body,
+    { headers: { ...this.getAuthHeaders(), 'Content-Type': 'application/json' }, responseType: 'text' }
+  ).subscribe({
+    next: (msg: string) => {
+      this.toastr.success(msg, this.translate.instant('register_sys_succes'));
+      this.resetPasswordChangeForm();
+      this.passwordChangeLoading = false;
+    },
+    error: (err) => {
+      this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
+      this.passwordChangeLoading = false;
+    }
+  });
+}
+
+cancelPasswordChange() {
+  this.resetPasswordChangeForm();
+}
+
+remindLoginToEmail() {
+  if (this.loginRemindLoading) return;
+
+  this.loginRemindLoading = true;
+
+  this.http.post(
+    `${this.SITE_API}/login/remind`,
+    null,
+    { headers: this.getAuthHeaders(), responseType: 'text' }
+  ).subscribe({
+    next: (msg: string) => {
+      this.toastr.success(msg, this.translate.instant('register_sys_succes'));
+      this.loginRemindLoading = false;
+    },
+    error: (err) => {
+      this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
+      this.loginRemindLoading = false;
+    }
+  });
+}
+
+  openForgotPassword() {
+  this.forgotPasswordOpen = true;
+  this.resetForgotPasswordForm();
+}
+
+closeForgotPassword() {
+  if (this.forgotLoading) return;
+  this.forgotPasswordOpen = false;
+  this.resetForgotPasswordForm();
+}
+
+private resetForgotPasswordForm() {
+  this.forgotPasswordEmail = '';
+  this.forgotPasswordConfirmDTO.code = '';
+  this.forgotPasswordConfirmDTO.newPassword = '';
+  this.forgotCodeSent = false;
+  this.forgotLoading = false;
+}
+
+requestPasswordResetCode() {
+  if (this.forgotLoading) return;
+
+  const email = this.forgotPasswordEmail.trim();
+  if (!email) {
+    this.toastr.error(this.translate.instant('cabinet.forgotPassword.emailRequired'), this.translate.instant('register_sys_error'));
+    return;
+  }
+
+  this.forgotLoading = true;
+
+  this.http.post(
+    `${this.SITE_API}/password-reset/request`,
+    { email },
+    {
+      headers: { 'Accept-Language': this.currentLanguage, 'Content-Type': 'application/json' },
+      responseType: 'text'
+    }
+  ).subscribe({
+    next: (msg: string) => {
+      this.forgotCodeSent = true;
+      this.toastr.success(msg, this.translate.instant('register_sys_succes'));
+      this.forgotLoading = false;
+    },
+    error: (err) => {
+      this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
+      this.forgotLoading = false;
+    }
+  });
+}
+
+confirmPasswordReset() {
+  if (this.forgotLoading) return;
+
+  const email = this.forgotPasswordEmail.trim();
+  const code = this.forgotPasswordConfirmDTO.code.trim();
+  const newPassword = this.forgotPasswordConfirmDTO.newPassword.trim();
+
+  if (!email || !code || !newPassword) {
+    this.toastr.error(this.translate.instant('cabinet.forgotPassword.fieldsRequired'), this.translate.instant('register_sys_error'));
+    return;
+  }
+
+  this.forgotLoading = true;
+
+  const body = { email, code, newPassword };
+
+  this.http.post(
+    `${this.SITE_API}/password-reset/confirm`,
+    body,
+    {
+      headers: { 'Accept-Language': this.currentLanguage, 'Content-Type': 'application/json' },
+      responseType: 'text'
+    }
+  ).subscribe({
+    next: (msg: string) => {
+      this.toastr.success(msg, this.translate.instant('register_sys_succes'));
+      // повертаємо на логін
+      this.forgotPasswordOpen = false;
+      this.resetForgotPasswordForm();
+      this.forgotLoading = false;
+    },
+    error: (err) => {
+      this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
+      this.forgotLoading = false;
+    }
+  });
 }
 }

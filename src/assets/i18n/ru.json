@@ -97,6 +97,45 @@
     "cabinet.common.dash": "—",
     "cabinet.minutes": "Мин",
     "cabinet.less_one_minute": "меньше минуты",
+
+    "cabinet.loginRemind.title": "Напомнить логин",
+    "cabinet.loginRemind.hint": "Нажмите кнопку ниже — мы отправим ваш логин на текущий e-mail аккаунта.",
+    "cabinet.loginRemind.send": "Отправить логин на e-mail",
+    "cabinet.loginRemind.sending": "Отправляем...",
+
+    "cabinet.changePassword.title": "Смена пароля",
+    "cabinet.changePassword.hint": "Нажмите кнопку ниже — мы отправим код подтверждения на ваш текущий e-mail. Затем введите новый пароль и код.",
+    "cabinet.changePassword.sendCode": "Отправить код на e-mail",
+    "cabinet.changePassword.sending": "Отправляем...",
+    "cabinet.changePassword.newPasswordLabel": "Новый пароль",
+    "cabinet.changePassword.newPasswordPlaceholder": "Введите новый пароль",
+    "cabinet.changePassword.codeLabel": "Код подтверждения",
+    "cabinet.changePassword.codePlaceholder": "Введите код из письма",
+    "cabinet.changePassword.confirm": "Подтвердить смену пароля",
+    "cabinet.changePassword.checking": "Проверяем...",
+    "cabinet.changePassword.resend": "Отправить код ещё раз",
+    "cabinet.changePassword.cancel": "Отмена",
+
+    "cabinet.forgotPassword.open": "Забыли пароль?",
+    "cabinet.forgotPassword.backToLogin": "Назад ко входу",
+
+    "cabinet.forgotPassword.emailLabel": "E-mail",
+    "cabinet.forgotPassword.emailPlaceholder": "Введите e-mail",
+    "cabinet.forgotPassword.sendCode": "Отправить код",
+    "cabinet.forgotPassword.resend": "Отправить код ещё раз",
+
+    "cabinet.forgotPassword.hint": "Мы отправили код подтверждения на вашу почту. Введите код и новый пароль.",
+
+    "cabinet.forgotPassword.codeLabel": "Код подтверждения",
+    "cabinet.forgotPassword.codePlaceholder": "Введите код из письма",
+
+    "cabinet.forgotPassword.newPasswordLabel": "Новый пароль",
+    "cabinet.forgotPassword.newPasswordPlaceholder": "Введите новый пароль",
+
+    "cabinet.forgotPassword.confirm": "Подтвердить смену пароля",
+
+    "cabinet.forgotPassword.emailRequired": "Укажите e-mail.",
+    "cabinet.forgotPassword.fieldsRequired": "Заполните e-mail, код и новый пароль.",
     
     "about.short.header": "Краткое описание сервера",
     "about.short.desc1": "Бездонатный сервер Lineage 2 Interlude на клиенте Classic. Основной акцент сервера x10 сосредоточен на аутентичности хроник Interlude для лучшего игрового опыта наших игроков. Для администрации сервера главное в первую очередь создать комфортную атмосферу для игры, в которой будет полностью отсутствовать концепция \"PAY2WIN\", зарплатных кланов, несправедливого отношения администрации к игроку. Это наш первый запуск, поэтому описание сервера может изменяться или дополняться.",

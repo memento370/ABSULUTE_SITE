@@ -96,6 +96,45 @@
     "cabinet.minutes": "Min",
     "cabinet.less_one_minute": "less than a minute",
 
+    "cabinet.loginRemind.title": "Remind login",
+    "cabinet.loginRemind.hint": "Click the button below — we will send your login to your account's current e-mail.",
+    "cabinet.loginRemind.send": "Send login to e-mail",
+    "cabinet.loginRemind.sending": "Sending...",
+
+
+    "cabinet.changePassword.title": "Change password",
+    "cabinet.changePassword.hint": "Click the button below — we will send a verification code to your current e-mail. Then enter the new password and the code.",
+    "cabinet.changePassword.sendCode": "Send code to e-mail",
+    "cabinet.changePassword.sending": "Sending...",
+    "cabinet.changePassword.newPasswordLabel": "New password",
+    "cabinet.changePassword.newPasswordPlaceholder": "Enter new password",
+    "cabinet.changePassword.codeLabel": "Verification code",
+    "cabinet.changePassword.codePlaceholder": "Enter the code from the email",
+    "cabinet.changePassword.confirm": "Confirm password change",
+    "cabinet.changePassword.checking": "Checking...",
+    "cabinet.changePassword.resend": "Send code again",
+    "cabinet.changePassword.cancel": "Cancel",
+
+    "cabinet.forgotPassword.open": "Forgot password?",
+    "cabinet.forgotPassword.backToLogin": "Back to login",
+
+    "cabinet.forgotPassword.emailLabel": "E-mail",
+    "cabinet.forgotPassword.emailPlaceholder": "Enter your e-mail",
+    "cabinet.forgotPassword.sendCode": "Send code",
+    "cabinet.forgotPassword.resend": "Send code again",
+
+    "cabinet.forgotPassword.hint": "We sent a verification code to your e-mail. Enter the code and your new password.",
+
+    "cabinet.forgotPassword.codeLabel": "Verification code",
+    "cabinet.forgotPassword.codePlaceholder": "Enter the code from the e-mail",
+
+    "cabinet.forgotPassword.newPasswordLabel": "New password",
+    "cabinet.forgotPassword.newPasswordPlaceholder": "Enter a new password",
+
+    "cabinet.forgotPassword.confirm": "Confirm password reset",
+
+    "cabinet.forgotPassword.emailRequired": "Please enter your e-mail.",
+    "cabinet.forgotPassword.fieldsRequired": "Please fill in e-mail, code, and new password.",
 
     "about.short.title": "Short Description",
     "about.short.header": "Short Server Description",

@@ -5,19 +5,109 @@
         <h1 class="name-main">L2 Absolute</h1>
         <h4 class="subname-main">{{ 'title' | translate }}</h4>
       </div>
-      <form class="form">
-        <div class="form-group">
-          <label for="username">{{ 'cabinet_login_1' | translate }}</label>
-          <input type="text" id="username" [(ngModel)]="loginRequestDTO.login" name="login" class="form-control" [placeholder]="'cabinet_login_2' | translate" [disabled]="loginLoading" />
-        </div>
-        <div class="form-group">
-          <label for="password">{{ 'cabinet_pass_1' | translate }}</label>
-          <input type="password" id="password" [(ngModel)]="loginRequestDTO.password" name="password" class="form-control" [placeholder]="'cabinet_pass_2' | translate" [disabled]="loginLoading" />
-        </div>
-        <button type="button" class="btn primary" (click)="onSubmit()" [disabled]="loginLoading">
-          {{ loginLoading ? ('cabinet.common.loadingDots' | translate) : ('cabinet_enter' | translate) }}
-        </button>
-      </form>
+  <!-- ===== Login form ===== -->
+  <form class="form" *ngIf="!forgotPasswordOpen">
+    <div class="form-group">
+      <label for="username">{{ 'cabinet_login_1' | translate }}</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="loginRequestDTO.login"
+        name="login"
+        class="form-control"
+        [placeholder]="'cabinet_login_2' | translate"
+        [disabled]="loginLoading"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">{{ 'cabinet_pass_1' | translate }}</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="loginRequestDTO.password"
+        name="password"
+        class="form-control"
+        [placeholder]="'cabinet_pass_2' | translate"
+        [disabled]="loginLoading"
+      />
+    </div>
+
+    <button type="button" class="btn-login primary" (click)="onSubmit()" [disabled]="loginLoading">
+      {{ loginLoading ? ('cabinet.common.loadingDots' | translate) : ('cabinet_enter' | translate) }}
+    </button>
+
+    <button type="button" class="btn-login ghost" (click)="openForgotPassword()" [disabled]="loginLoading">
+      {{ 'cabinet.forgotPassword.open' | translate }}
+    </button>
+  </form>
+
+  <!-- ===== Forgot password flow ===== -->
+  <form class="form" *ngIf="forgotPasswordOpen">
+    <!-- Step 1: request code -->
+    <ng-container *ngIf="!forgotCodeSent">
+      <div class="form-group">
+        <label>{{ 'cabinet.forgotPassword.emailLabel' | translate }}</label>
+        <input
+          type="email"
+          class="form-control"
+          [(ngModel)]="forgotPasswordEmail"
+          name="forgotPasswordEmail"
+          [placeholder]="'cabinet.forgotPassword.emailPlaceholder' | translate"
+          [disabled]="forgotLoading"
+        />
+      </div>
+
+      <button type="button" class="btn-login primary" (click)="requestPasswordResetCode()" [disabled]="forgotLoading">
+        {{ forgotLoading ? ('cabinet.common.loadingDots' | translate) : ('cabinet.forgotPassword.sendCode' | translate) }}
+      </button>
+
+      <button type="button" class="btn-login ghost" (click)="closeForgotPassword()" [disabled]="forgotLoading">
+        {{ 'cabinet.forgotPassword.backToLogin' | translate }}
+      </button>
+    </ng-container>
+
+    <!-- Step 2: confirm -->
+    <ng-container *ngIf="forgotCodeSent">
+      <p class="hint">{{ 'cabinet.forgotPassword.hint' | translate }}</p>
+
+      <div class="form-group">
+        <label>{{ 'cabinet.forgotPassword.codeLabel' | translate }}</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="forgotPasswordConfirmDTO.code"
+          name="forgotPasswordCode"
+          [placeholder]="'cabinet.forgotPassword.codePlaceholder' | translate"
+          [disabled]="forgotLoading"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'cabinet.forgotPassword.newPasswordLabel' | translate }}</label>
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="forgotPasswordConfirmDTO.newPassword"
+          name="forgotNewPassword"
+          [placeholder]="'cabinet.forgotPassword.newPasswordPlaceholder' | translate"
+          [disabled]="forgotLoading"
+        />
+      </div>
+
+      <button type="button" class="btn-login primary" (click)="confirmPasswordReset()" [disabled]="forgotLoading">
+        {{ forgotLoading ? ('cabinet.common.loadingDots' | translate) : ('cabinet.forgotPassword.confirm' | translate) }}
+      </button>
+
+      <button type="button" class="btn-login secondary" (click)="requestPasswordResetCode()" [disabled]="forgotLoading">
+        {{ 'cabinet.forgotPassword.resend' | translate }}
+      </button>
+
+      <button type="button" class="btn-login ghost" (click)="closeForgotPassword()" [disabled]="forgotLoading">
+        {{ 'cabinet.forgotPassword.backToLogin' | translate }}
+      </button>
+    </ng-container>
+  </form>
     </div>
   </div>
 
@@ -53,7 +143,7 @@
 
     <div class="cabinet-body">
       <div *ngIf="activeTab==='info'" class="panel">
-        <div class="panel-title">{{ 'cabinet.section.info' | translate }}</div>
+        <!-- <div class="panel-title">{{ 'cabinet.section.info' | translate }}</div> -->
 
         <div class="grid">
           <div class="card">
@@ -89,7 +179,7 @@
       </div>
 
       <div *ngIf="activeTab==='characters'" class="panel">
-        <div class="panel-title">{{ 'cabinet.section.characters' | translate }}</div>
+        <!-- <div class="panel-title">{{ 'cabinet.section.characters' | translate }}</div> -->
 
         <div class="grid grid-2">
           <div class="card">
@@ -145,7 +235,7 @@
       </div>
 
       <div *ngIf="activeTab==='security'" class="panel">
-        <div class="panel-title">{{ 'cabinet.section.security' | translate }}</div>
+        <!-- <div class="panel-title">{{ 'cabinet.section.security' | translate }}</div> -->
 
         <div class="grid">
           <div class="card">
@@ -181,6 +271,48 @@
               </button>
             </div>
           </div>
+        <div class="card">
+          <div class="card-title">{{ 'cabinet.loginRemind.title' | translate }}</div>
+            <p class="hint">{{ 'cabinet.loginRemind.hint' | translate }}</p>
+            <button class="btn primary" type="button" (click)="remindLoginToEmail()" [disabled]="loginRemindLoading">{{ (loginRemindLoading ? 'cabinet.loginRemind.sending' : 'cabinet.loginRemind.send') | translate }}</button>
+          </div>
+
+        <!-- PASSWORD CHANGE -->
+        <div class="card">
+          <div class="card-title">{{ 'cabinet.changePassword.title' | translate }}</div>
+
+          <p class="hint" *ngIf="!passwordCodeSent">{{ 'cabinet.changePassword.hint' | translate }}</p>
+
+          <button class="btn primary" type="button" (click)="requestPasswordChangeCode()" [disabled]="passwordChangeLoading" *ngIf="!passwordCodeSent">
+            {{ (passwordChangeLoading ? 'cabinet.changePassword.sending' : 'cabinet.changePassword.sendCode') | translate }}
+          </button>
+
+          <div *ngIf="passwordCodeSent">
+            <div class="form-group">
+              <label>{{ 'cabinet.changePassword.newPasswordLabel' | translate }}</label>
+              <input type="password" class="form-control" [(ngModel)]="passwordChangeConfirmDTO.newPassword" name="newPassword"
+                    [placeholder]="'cabinet.changePassword.newPasswordPlaceholder' | translate" [disabled]="passwordChangeLoading" />
+            </div>
+
+            <div class="form-group">
+              <label>{{ 'cabinet.changePassword.codeLabel' | translate }}</label>
+              <input type="text" class="form-control" [(ngModel)]="passwordChangeConfirmDTO.code" name="passwordChangeCode"
+                    [placeholder]="'cabinet.changePassword.codePlaceholder' | translate" [disabled]="passwordChangeLoading" />
+            </div>
+
+            <button class="btn primary" type="button" (click)="confirmPasswordChange()" [disabled]="passwordChangeLoading">
+              {{ (passwordChangeLoading ? 'cabinet.changePassword.checking' : 'cabinet.changePassword.confirm') | translate }}
+            </button>
+
+            <button class="btn secondary" type="button" (click)="requestPasswordChangeCode()" [disabled]="passwordChangeLoading">
+              {{ 'cabinet.changePassword.resend' | translate }}
+            </button>
+
+            <button class="btn ghost" type="button" (click)="cancelPasswordChange()" [disabled]="passwordChangeLoading">
+              {{ 'cabinet.changePassword.cancel' | translate }}
+            </button>
+          </div>
+        </div>
 
           <div class="card">
             <div class="card-title">{{ 'cabinet.card.session' | translate }}</div>
