@@ -264,18 +264,19 @@ label {
   border-radius: 12px;
   cursor: pointer;
   transition: 0.2s ease;
-  margin-top: 10px;
+  margin: 1em;
+
 }
 
 /* Button login*/
 .btn-login {
-  width: 45%;            /* фіксована ширина */
+  width: 40%;            /* фіксована ширина */
   max-width: 100%;         /* щоб не вилазило на дуже вузьких екранах */  padding: 10px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: 0.2s ease;
-  margin-top: 10px;
+  margin : 1em;
 }
 
 .btn.primary {
