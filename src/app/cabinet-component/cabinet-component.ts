@@ -262,6 +262,7 @@ export class CabinetComponent {
         this.emailCodeSent = true;
         this.toastr.success(msg, this.translate.instant('register_sys_succes'));
         this.emailChangeLoading = false;
+
       },
       error: (err) => {
         this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
@@ -289,6 +290,8 @@ export class CabinetComponent {
         this.toastr.success(msg, this.translate.instant('register_sys_succes'));
         this.resetEmailChangeForm();
         this.emailChangeLoading = false;
+        this.l2email = body.newEmail;
+        localStorage.setItem('l2email', body.newEmail);
       },
       error: (err) => {
         this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
@@ -337,6 +340,7 @@ requestPasswordChangeCode() {
       this.passwordCodeSent = true;
       this.toastr.success(msg, this.translate.instant('register_sys_succes'));
       this.passwordChangeLoading = false;
+      this.logout();
     },
     error: (err) => {
       this.toastr.error(err?.error, this.translate.instant('register_sys_error'));
