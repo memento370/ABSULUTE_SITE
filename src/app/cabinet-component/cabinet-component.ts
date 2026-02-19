@@ -207,12 +207,30 @@ export class CabinetComponent {
     this.selectedCharacter = ch;
   }
 
-  // Невеликий хелпер для відображення EN/RU (UA поки беремо як RU)
   getRaceLabel(ch: CharacterDTO): string {
-    return this.currentLanguage === 'en' ? ch.raceEn : ch.raceRu;
+    switch (this.currentLanguage) {
+      case 'en':
+        return ch.raceEn;
+      case 'uk':
+        return ch.raceUk;
+      case 'ru':
+        return ch.raceRu;
+      default:
+        return ch.raceUk;
+    }
   }
+
   getClassLabel(ch: CharacterDTO): string {
-    return this.currentLanguage === 'en' ? ch.classEn : ch.classRu;
+    switch (this.currentLanguage) {
+      case 'en':
+        return ch.classEn;
+      case 'uk':
+        return ch.classUk;
+      case 'ru':
+        return ch.classRu;
+      default:
+        return ch.classUk;
+    }
   }
 
   private getAuthHeaders() {
