@@ -1,21 +1,89 @@
 <div class="main-page">
 
-  <div class="online-box">
-    <div class="online-value">Online: {{ online }}</div>
-    <div class="online-note">*Онлайн персонажі без урахування офлайн трейдерів та крафтерів</div>
-  </div>
-
-  <div>
-    <h1 class="name-main">L2 Absolute</h1>
-    <!-- <h4 class="subname-main">Кастомный сервер L2 interlude на клиенте classic</h4> -->
+  <div class="title-container">
+    <h1 class="name-main">L2-Absolute</h1>
     <h4 class="subname-main">{{ 'title' | translate }}</h4>
   </div>
 
-  <div class="info-area">
-    <h2>{{ 'welcome_info_1' | translate }}</h2><br>
-    <h4>{{ 'welcome_info_2' | translate }}</h4><br>
-    <h4>{{ 'welcome_info_3' | translate }}</h4><br>
-    <h4>{{ 'welcome_info_4' | translate }}</h4>
-  </div>
+  <div class="page-layout">
 
+    <!-- Ліва колонка -->
+    <aside class="side-column left-column">
+      <div class="sticky-wrapper">
+        <section class="side-panel">
+          <h3 class="side-title">{{ 'main_top_pvp_title' | translate }}</h3>
+          <div class="side-content">
+            <div class="top-item" *ngFor="let player of topPvp; let i = index">
+              {{ i + 1 }}. {{ player.characterName }} — {{ player.pvpKills }}
+            </div>
+            <div *ngIf="topPvp.length === 0" class="top-item">
+              {{ 'main_loading' | translate }}
+            </div>
+          </div>
+        </section>
+
+        <section class="side-panel">
+          <h3 class="side-title">{{ 'main_top_pk_title' | translate }}</h3>
+          <div class="side-content">
+            <div class="top-item" *ngFor="let player of topPk; let i = index">
+              {{ i + 1 }}. {{ player.characterName }} — {{ player.pkKills }}
+            </div>
+            <div *ngIf="topPk.length === 0" class="top-item">
+              {{ 'main_loading' | translate }}
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- Центральна колонка -->
+    <main class="center-column">
+      <div class="sections-wrapper">
+        <section class="content-block">
+          <h2 class="block-title">{{ 'main_about_project_title' | translate }}</h2>
+          <div class="block-content">
+            <h3 [innerHTML]="'main_about_project_text' | translate"></h3>
+          </div>
+        </section>
+
+        <section class="content-block">
+          <h2 class="block-title">{{ 'main_why_play_title' | translate }}</h2>
+          <div class="block-content">
+            <h3 [innerHTML]="'main_why_play_text' | translate"></h3>
+          </div>
+        </section>
+
+        <section class="content-block">
+          <h2 class="block-title">{{ 'main_features_title' | translate }}</h2>
+          <div class="block-content">
+            <h3 [innerHTML]="'main_features_text' | translate"></h3>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Права колонка -->
+    <aside class="side-column right-column">
+      <div class="sticky-wrapper">
+        <div class="online-box">
+          <div class="online-label">{{ 'main_online_label' | translate }}</div>
+          <div class="online-value">{{ online }}</div>
+          <div class="online-note">{{ 'main_online_note' | translate }}</div>
+        </div>
+
+        <section class="side-panel">
+          <h3 class="side-title">{{ 'main_top_clans_title' | translate }}</h3>
+          <div class="side-content">
+            <div class="top-item" *ngFor="let clan of topClans; let i = index">
+              {{ i + 1 }}. {{ clan.clanName }} — {{ clan.reputation | number }}
+            </div>
+            <div *ngIf="topClans.length === 0" class="top-item">
+              {{ 'main_loading' | translate }}
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+  </div>
 </div>
