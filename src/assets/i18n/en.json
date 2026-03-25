@@ -166,6 +166,9 @@
     "about.short.group_bonus": "Bonus to EXP/SP for group leveling, from 30% to 67%, increased distance at which drop and experience are received by all group members",
     "about.short.free_tp": "Free teleports up to level 40",
     "about.short.rb_spawn": "Raid boss spawn: levels 20-40 - 6 hours + 2 hours random spawn, levels 41-60 - 8 hours + 3 hours random spawn, levels 61+ - 10 hours + 4 hours random spawn.",
+    "about.short.shots": "SSD,BSSD,SSC,BSSC - can be found at the grocer",
+    "about.short.autofishing": "Auto-fishing enabled",
+
 
     "about.rates.title": "Full Rates Description",
     "about.rates.header": "Full Rates Description",

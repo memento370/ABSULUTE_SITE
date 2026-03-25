@@ -67,6 +67,10 @@ export class AboutComponent {
           <h3>${this.translate.instant('about.short.group_bonus')}</h3>
           <h3>${this.translate.instant('about.short.free_tp')}</h3>
           <h3>${this.translate.instant('about.short.rb_spawn')}</h3>
+          <h3>${this.translate.instant('about.short.shots')}</h3>
+          <h3>${this.translate.instant('about.short.autofishing')}</h3>
+
+
         `
       },
       {
