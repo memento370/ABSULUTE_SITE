@@ -40,7 +40,10 @@
     }
   }
  
-
+  .partner-panel {
+ 
+   
+  }
 /* Мовна панель на мобілці — завжди розгорнута в рядок, над навігацією */
 @media (max-width: 768px) {
   .language-panel {
@@ -72,3 +75,4 @@
     transform: scale(0.92);
   }
 }
+
