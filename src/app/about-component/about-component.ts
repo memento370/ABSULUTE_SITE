@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -11,13 +12,16 @@ import { Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None
 })
 export class AboutComponent {
-  currentLanguage: string = '';
-  private langChangeSubscription: Subscription | undefined;
+  currentLanguage = '';
+  private langChangeSubscription?: Subscription;
+  private isBrowser: boolean;
 
   constructor(
     private sanitizer: DomSanitizer,
-    private translate: TranslateService
+    private translate: TranslateService,
+    @Inject(PLATFORM_ID) platformId: Object
   ) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.currentLanguage = this.translate.currentLang || 'uk';
     this.buildSections();
   }
@@ -30,9 +34,7 @@ export class AboutComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.langChangeSubscription) {
-      this.langChangeSubscription.unsubscribe();
-    }
+    this.langChangeSubscription?.unsubscribe();
   }
 
   sanitize(html: string): SafeHtml {
@@ -42,6 +44,57 @@ export class AboutComponent {
   sections: { title: string; html: string }[] = [];
   activeSection = 0;
 
+  scrollToSection(index: number) {
+    if (!this.isBrowser) return;
+
+    const content = document.querySelector('.content') as HTMLElement | null;
+    const target = document.getElementById('section-' + index);
+
+    if (!content || !target) return;
+
+    content.scrollTo({
+      top: target.offsetTop,
+      behavior: 'smooth'
+    });
+
+    this.activeSection = index;
+  }
+
+  onContentScroll() {
+    if (!this.isBrowser) return;
+
+    const container = document.querySelector('.content') as HTMLElement | null;
+    const sections = Array.from(document.querySelectorAll('.content-section')) as HTMLElement[];
+
+    if (!container || !sections.length) return;
+
+    const containerTop = container.scrollTop;
+
+    for (let i = 0; i < sections.length; i++) {
+      const sectionTop = sections[i].offsetTop;
+      const sectionHeight = sections[i].offsetHeight;
+
+      if (containerTop >= sectionTop - 20 && containerTop < sectionTop + sectionHeight - 20) {
+        this.activeSection = i;
+        break;
+      }
+    }
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   private buildSections() {
     this.sections = [
       {
@@ -390,29 +443,11 @@ export class AboutComponent {
       }
     ];
   }
-
-  scrollToSection(index: number) {
-    const content = document.querySelector('.content') as HTMLElement;
-    const target = document.getElementById('section-' + index);
-    if (!content || !target) return;
-    content.scrollTo({
-      top: target.offsetTop,
-      behavior: 'smooth'
-    });
-    this.activeSection = index;
-  }
-
-  onContentScroll() {
-    const container = document.querySelector('.content') as HTMLElement;
-    const sections = Array.from(document.querySelectorAll('.content-section')) as HTMLElement[];
-    const containerTop = container.scrollTop;
-    for (let i = 0; i < sections.length; i++) {
-      const sectionTop = sections[i].offsetTop;
-      const sectionHeight = sections[i].offsetHeight;
-      if (containerTop >= sectionTop - 20 && containerTop < sectionTop + sectionHeight - 20) {
-        this.activeSection = i;
-        break;
-      }
-    }
-  }
-}
+  
+}  
+  
+  
+  
+  
+  
+  

@@ -30,14 +30,22 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-           "assets": [
+            "assets": [
               "src/assets"
             ],
             "styles": [
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": []
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {

@@ -1,5 +1,5 @@
-// app.component.ts
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,19 +23,34 @@ const BG: Record<string, BgDef> = {
 export class AppComponent {
   currentBackground = 'main';
   isCollapsed = true;
-  selectedLanguage = '';
+  selectedLanguage = 'uk';
+  private isBrowser: boolean;
 
-  constructor(private router: Router, private translate: TranslateService) {
-    translate.defaultLang = 'uk';
+  constructor(
+    private router: Router,
+    private translate: TranslateService,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
 
-    const stored = localStorage.getItem('lang');
-    this.selectedLanguage = stored || 'uk';
+    this.translate.defaultLang = 'uk';
+
+    if (this.isBrowser) {
+      const stored = localStorage.getItem('lang');
+      this.selectedLanguage = stored || 'uk';
+      localStorage.setItem('lang', this.selectedLanguage);
+    }
+
     this.translate.use(this.selectedLanguage);
-    localStorage.setItem('lang', this.selectedLanguage);
   }
 
   ngOnInit() {
-    this.preloadAll(Object.values(BG).map(x => x.url));
+    this.setBackground(this.router.url);
+
+    if (this.isBrowser) {
+      this.preloadAll(Object.values(BG).map(x => x.url));
+    }
+
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe(e => this.setBackground(e.urlAfterRedirects));
@@ -44,12 +59,20 @@ export class AppComponent {
   private setBackground(urlAfterRedirects: string) {
     const base = urlAfterRedirects.split('?')[0].split('#')[0];
     const def = BG[base] ?? BG['/'];
+
+    if (!this.isBrowser) {
+      this.currentBackground = def.cls;
+      return;
+    }
+
     this.preload(def.url).then(() => {
       this.currentBackground = def.cls;
     });
   }
 
   private preloadAll(urls: string[]) {
+    if (!this.isBrowser) return;
+
     for (const url of urls) {
       const img = new Image();
       img.decoding = 'async';
@@ -59,11 +82,15 @@ export class AppComponent {
   }
 
   private preload(url: string): Promise<void> {
+    if (!this.isBrowser) {
+      return Promise.resolve();
+    }
+
     return new Promise(resolve => {
       const img = new Image();
       img.decoding = 'async';
       img.onload = () => resolve();
-      img.onerror = () => resolve(); 
+      img.onerror = () => resolve();
       img.src = url;
     });
   }
@@ -71,7 +98,11 @@ export class AppComponent {
   switchLanguage(language: string) {
     this.translate.use(language);
     this.selectedLanguage = language;
-    localStorage.setItem('lang', language);
+
+    if (this.isBrowser) {
+      localStorage.setItem('lang', language);
+    }
+
     this.isCollapsed = true;
   }
 

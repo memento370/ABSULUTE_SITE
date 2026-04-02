@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { TopPkPlayer } from '../dto/TopPkPlayer';
 import { TopPvpPlayer } from '../dto/TopPvpPlayer';
 import { TopClan } from '../dto/TopClan';
@@ -12,37 +12,51 @@ import { TopClan } from '../dto/TopClan';
   styleUrl: './main-component.css'
 })
 export class MainComponent {
-
-  online: number = 0;
+  online = 0;
   topPvp: TopPvpPlayer[] = [];
   topPk: TopPkPlayer[] = [];
-  topClans: TopClan[] = []; 
-  constructor(private http: HttpClient) {}
+  topClans: TopClan[] = [];
+
+  private isBrowser: boolean;
+  private refreshTimer: any = null;
+
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.loadOnline();
     this.loadTopPvp();
     this.loadTopPk();
     this.loadTopClans();
-      setInterval(() => {
+
+    if (this.isBrowser) {
+      this.refreshTimer = setInterval(() => {
         this.loadOnline();
         this.loadTopPvp();
         this.loadTopPk();
         this.loadTopClans();
       }, 30000);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshTimer) {
+      clearInterval(this.refreshTimer);
+    }
   }
 
   loadOnline(): void {
     this.http.get<number>('https://l2-absolute.com/api/server/accounts/getOnline')
       .subscribe({
-        next: (response) => {
-          this.online = response;
-        },
-        error: (error) => {
-          console.error('Помилка при отриманні онлайну:', error);
-        }
+        next: (response) => this.online = response,
+        error: (error) => console.error('Помилка при отриманні онлайну:', error)
       });
   }
+
   loadTopPvp(): void {
     this.http.get<TopPvpPlayer[]>('https://l2-absolute.com/api/server/accounts/top/pvp')
       .subscribe({
@@ -50,7 +64,7 @@ export class MainComponent {
         error: (error) => console.error('Помилка при отриманні топу PVP:', error)
       });
   }
- 
+
   loadTopPk(): void {
     this.http.get<TopPkPlayer[]>('https://l2-absolute.com/api/server/accounts/top/pk')
       .subscribe({
