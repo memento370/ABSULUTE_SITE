@@ -199,39 +199,58 @@
   }
 }
 
-/* Планшети */
+/* Планшети і мобільні */
 @media (max-width: 1200px) {
+  .page-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   .side-column {
     position: static;
     width: 100%;
   }
 
   .center-column {
+    width: 100%;
     padding-left: 0;
     padding-right: 0;
+    order: 2;
+  }
+
+  .left-column {
+    order: 1;
+  }
+
+  .right-column {
+    order: 3;
   }
 
   .left-column .sticky-wrapper,
   .right-column .sticky-wrapper {
-    height: auto;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
+    height: auto;
+    width: 100%;
   }
 
-  .side-panel {
+  /* Головний фікс: прибираємо desktop flex у лівих блоків */
+  .left-column .side-panel,
+  .right-column .side-panel {
+    flex: none;
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
-  }
-}
-
-@media (max-width: 1024px) {
-  .content-block {
-    min-height: 280px;
-    padding: 20px;
+    min-height: auto;
   }
 
-  .block-title {
-    font-size: 24px;
+  .online-box {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
   }
 }
 
@@ -253,9 +272,15 @@
   }
 
   .content-block,
-  .side-panel {
+  .left-column .side-panel,
+  .right-column .side-panel,
+  .online-box {
     width: 100%;
     max-width: 100%;
+  }
+
+  .content-block {
+    padding: 20px;
   }
 
   .block-title {
@@ -269,12 +294,6 @@
   .top-item {
     font-size: 11px;
     padding: 5px 6px;
-  }
-
-  .online-box {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
   }
 
   .online-value {
