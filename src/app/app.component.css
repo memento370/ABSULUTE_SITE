@@ -73,3 +73,88 @@
   }
 }
 
+/* ===== Партнерська панель ===== */
+.partners-panel {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 50;
+}
+
+.partners-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  max-width: 100%;
+  
+  /* Для горизонтального скролу на мобілці */
+  overflow-x: auto;
+  
+  /* Скорочення для браузерів */
+  -webkit-overflow-scrolling: touch;
+  
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.partner-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  /* Ховер ефект */
+  transition: all 0.3s ease;
+  opacity: 0.9;
+  
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+/* Мобільна адаптація */
+@media (max-width: 768px) {
+  .partners-panel {
+    padding: 10px 12px;
+  }
+  
+  .partners-container {
+    gap: 10px;
+  }
+  
+  .partner-link {
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}
+
