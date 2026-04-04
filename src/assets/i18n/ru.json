@@ -304,6 +304,11 @@
     "about.services.prices1": "Смена цвета никнейма/титула, смена пола, переименование персонажа — 5 000 000 адены.",
     "about.services.prices2": "Украшения — 1 000 000 адены.",
     "about.services.concept": "Это часть бездонатной концепции сервера и будет дальше развиваться."
-
-
+,
+    "footer_about": "О сервере",
+    "footer_desc": "Аутентичный сервер Lineage 2 Interlude на клиенте Classic",
+    "footer_links": "Навигация",
+    "footer_contacts": "Контакты",
+    "footer_telegram": "Телеграм",
+    "footer_rights": "Все права защищены"
 }

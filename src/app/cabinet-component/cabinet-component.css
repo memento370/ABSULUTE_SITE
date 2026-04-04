@@ -1,6 +1,6 @@
 /* ====== Page layout ====== */
 .cabinet-page {
-  height: 100vh;          /* було min-height */
+  min-height: 100%;
   overflow: hidden;       /* щоб зовнішній скрол не з’являвся */
   padding: 24px;
   box-sizing: border-box;

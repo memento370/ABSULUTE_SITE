@@ -3,7 +3,14 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
+    overflow: hidden;
+  }
+
+  app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
   }
 
   @font-face {
@@ -145,9 +152,28 @@ html, body {
   .page-container {
     position: relative;
     width: 100%;
-    min-height: 100vh; /* Щоб завжди була висота */
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
     z-index: 1;
-}
+  }
+
+  .page-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .page-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .page-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+  }
+
+  .page-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
 
 .background-container {
   position: fixed; /* або absolute, якщо потрібно */

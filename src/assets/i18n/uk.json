@@ -303,6 +303,11 @@
     "about.services.prices1": "Зміна кольору нікнейму/титулу, зміна статі, перейменування персонажа — 5 000 000 адени.",
     "about.services.prices2": "Прикраси — 1 000 000 адени.",
     "about.services.concept": "Це частина бездонатної концепції серверу й буде надалі розширюватися."
- 
-
+,
+    "footer_about": "Про сервер",
+    "footer_desc": "Автентичний сервер Lineage 2 Interlude на клієнті Classic",
+    "footer_links": "Навігація",
+    "footer_contacts": "Контакти",
+    "footer_telegram": "Телеграм",
+    "footer_rights": "Усі права захищено"
 }

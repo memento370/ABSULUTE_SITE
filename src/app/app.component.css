@@ -158,3 +158,22 @@
   }
 }
 
+/* ===== FOOTER ===== */
+.app-footer {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 20px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: 'HombreRegular', Arial, sans-serif;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.app-footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+

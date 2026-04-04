@@ -1,9 +1,10 @@
 .main-page {
   position: relative;
-  height: 100vh;
+  min-height: 100%;
   width: 100%;
   box-sizing: border-box;
   padding: 20px;
+  padding-bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
@@ -52,7 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: calc(100vh - 190px);
+  max-height: calc(100vh - 250px);
 }
 
 /* Онлайн-блок у правій колонці */
@@ -94,17 +95,23 @@
   color: #fff;
   padding: 10px 10px 14px 10px;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.side-panel::-webkit-scrollbar {
+  display: none;
 }
 
 .left-column .side-panel {
-  flex: 1 1 0;
-  min-height: 0;
+  flex: 1 1 auto;
+  min-height: 100px;
 }
 
 .right-column .side-panel {
   flex: 1 1 auto;
-  min-height: 0;
+  min-height: 100px;
 }
 
 .side-title {
@@ -152,7 +159,7 @@
   gap: 20px;
   width: 100%;
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 100px;
 }
 
 .content-block {
@@ -268,7 +275,7 @@
   .sections-wrapper {
     gap: 14px;
     padding-top: 0;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
   }
 
   .content-block,
