@@ -1,83 +1,140 @@
+/* ===== REGISTRATION FORM ===== */
 .registration-form {
-    width: 300px;
-    margin: 10em auto;
-    margin-top: 0em;
-    background: rgba(0, 0, 0, 0.5); /* Чорний колір із прозорістю 80% */
-    padding: 20px;
-    border-radius: 10px; /* Закруглені кути */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Тінь */
-    color: #fff; /* Білий текст */
-    font-family: Arial, sans-serif; /* Шрифт */
-  }
-  
-  .form-group {
-    margin-bottom: 15px; /* Відступ між групами елементів */
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #fff; /* Білий текст */
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Напівпрозорі межі */
-    background: rgba(255, 255, 255, 0.1); /* Легкий прозорий фон */
-    color: #fff; /* Білий текст */
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .form-control:focus {
-    border-color: #007bff; /* Синій колір при фокусі */
-    outline: none;
-    background: rgba(255, 255, 255, 0.2); /* Трохи яскравіший фон при фокусі */
-  }
-  
-  .btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    color: #fff; /* Білий текст */
-    background-color: #007bff; /* Синя кнопка */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Плавний ефект */
-  }
-  
-  .btn:hover {
-    background-color: #0056b3; /* Темно-синій колір при наведенні */
-  }
-  
-  .btn:active {
-    background-color: #004080; /* Темніший колір при натисканні */
-  }
-  
+  width: 100%;
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 40px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
 
-  /* Медіа-запит для мобільних пристроїв */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  outline: none;
+  background: rgba(255, 107, 53, 0.05);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-center h3,
+.text-center h4,
+.text-center h6 {
+  color: var(--text-primary);
+  margin: 10px 0;
+}
+
+.text-center h3 {
+  font-size: 18px;
+}
+
+.text-center h4 {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.text-center h6 {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .registration-form {
-    width: 90%; /* Повна ширина екрану */
-    margin: 5em auto 0 auto; /* Зменшено верхній відступ */
-    padding: 15px; /* Зменшено внутрішні відступи */
-  }
-
-  .form-group {
-    margin-bottom: 10px; /* Зменшено відступи */
+    max-width: 90%;
+    margin: 30px auto;
+    padding: 30px;
   }
 
   .form-control {
-    font-size: 12px; /* Зменшено шрифт для мобілки */
-    padding: 8px; /* Зменшено padding */
+    font-size: 13px;
+    padding: 10px 12px;
   }
 
   .btn {
-    font-size: 14px; /* Зменшено шрифт кнопки */
-    padding: 8px; /* Зменшено padding */
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-form {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-control {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 10px;
   }
 }

@@ -1,21 +1,42 @@
 <div class="background-container" [ngClass]="currentBackground"></div>
-<nav class="top-nav">
-    <ul>
-      <li><a routerLink="/">{{ 'nav_main' | translate }}</a></li>
-      <li><a routerLink="/register">{{ 'nav_reg' | translate }}</a></li>
-      <li><a routerLink="/files">{{ 'nav_files' | translate }}</a></li>
-      <li><a routerLink="/about">{{ 'nav_about' | translate }}</a></li>
-      <!-- <li><a routerLink="/database">{{ 'nav_base' | translate }}</a></li> -->
-      <li><a routerLink="/cabinet">{{ 'nav_cabinet' | translate }}</a></li>
-      <li> <a href="https://t.me/l2absolute" target="_blank" rel="noopener noreferrer">{{ 'nav_forum' | translate }}</a></li>
 
-    </ul>
+<nav class="top-nav">
+  <ul>
+    <li><a routerLink="/">{{ 'nav_main' | translate }}</a></li>
+    <li><a routerLink="/register">{{ 'nav_reg' | translate }}</a></li>
+    <li><a routerLink="/files">{{ 'nav_files' | translate }}</a></li>
+    <li><a routerLink="/about">{{ 'nav_about' | translate }}</a></li>
+    <li><a routerLink="/cabinet">{{ 'nav_cabinet' | translate }}</a></li>
+    <li><a href="https://t.me/l2absolute" target="_blank" rel="noopener noreferrer">{{ 'nav_forum' | translate }}</a></li>
+  </ul>
+  
+  <!-- Мовна панель в навігації -->
+  <div class="language-panel-nav" [class.collapsed]="isCollapsed">
+    <ng-container *ngIf="isCollapsed; else expandedView">
+      <button
+        class="lang-btn"
+        [ngClass]="{
+          'lang-ua': selectedLanguage === 'uk',
+          'lang-en': selectedLanguage === 'en',
+          'lang-ru': selectedLanguage === 'ru'
+        }"
+        (click)="togglePanel()"
+        title="Select Language"
+      ></button>
+    </ng-container>
+
+    <ng-template #expandedView>
+      <button class="lang-btn lang-ua" (click)="switchLanguage('uk')" title="Українська"></button>
+      <button class="lang-btn lang-en" (click)="switchLanguage('en')" title="English"></button>
+      <button class="lang-btn lang-ru" (click)="switchLanguage('ru')" title="Русский"></button>
+    </ng-template>
+  </div>
 </nav>
 
 <!-- Партнерські кнопки -->
 <div class="partners-panel">
   <div class="partners-container">
-    <a href="https://l2soon.com/uk" target="_blank" rel="noopener" class="partner-link">
+  <a href="https://l2soon.com/uk" target="_blank" rel="noopener" class="partner-link">
       <img src="https://l2soon.com/images/button.gif" alt="L2SOON.COM — каталог серверів Lineage 2" width="88" height="31">
     </a>
     <a href="https://l2calendar.com" target="_blank" rel="noopener noreferrer">
@@ -35,34 +56,9 @@
     <a href="https://www.xtremetop100.com/in.php?site=1132378784" title="Lineage 2 Free server">
     <img src="https://www.xtremeTop100.com/votenew.jpg" border="0" alt="Lineage 2 Free server">
     </a>
-    <!-- End XtremeTop100 code -->
   </div>
 </div>
 
-<div class="language-panel" [class.collapsed]="isCollapsed">
-  <ng-container *ngIf="isCollapsed; else expandedView">
-    <button
-      class="lang-btn"
-      [ngClass]="{
-        'lang-ua': selectedLanguage === 'uk',
-        'lang-en': selectedLanguage === 'en',
-        'lang-ru': selectedLanguage === 'ru'
-      }"
-      (click)="togglePanel()"
-    ></button>
-  </ng-container>
-
-  <ng-template #expandedView>
-    <button class="lang-btn lang-ua" (click)="switchLanguage('uk')"></button>
-    <button class="lang-btn lang-en" (click)="switchLanguage('en')"></button>
-    <button class="lang-btn lang-ru" (click)="switchLanguage('ru')"></button>
-  </ng-template>
-</div>
 <div class="page-container">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
-
-<!-- Футер -->
-<footer class="app-footer">
-  <p>L2 Absolute © 2026 - {{ 'footer_rights' | translate }}</p>
-</footer>

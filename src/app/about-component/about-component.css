@@ -1,146 +1,306 @@
-/* Контейнер */
+/* ===== CONTENT WRAPPER ===== */
 .content-wrapper {
   display: flex;
   width: 100%;
   max-width: 1400px;
   margin: 20px auto;
-  gap: 20px;
+  gap: 24px;
   padding: 0 20px;
   box-sizing: border-box;
+  min-height: calc(100vh - 200px);
 }
 
-/* Ліве меню */
+/* ===== SIDEBAR MENU ===== */
 .sidebar {
-  width: 250px;
-  background: rgba(0,0,0,0.5);
-  padding: 15px;
-  border-radius: 10px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+  width: 280px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  height: fit-content;
+  position: sticky;
+  top: 80px;
 }
 
 .sidebar ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar li {
-  padding: 10px;
-  margin-bottom: 8px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 5px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
-  color: white;
-  transition: background 0.3s;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar li:last-child {
+  border-bottom: none;
 }
 
 .sidebar li:hover {
-  background: rgba(255,255,255,0.2);
+  background: var(--bg-hover);
+  color: var(--primary);
 }
 
 .sidebar li.active {
-  background: rgba(0,123,255,0.6);
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(0, 78, 137, 0.15) 100%);
+  color: var(--primary);
+  border-left: 4px solid var(--primary);
+  padding-left: 12px;
 }
 
+/* ===== CONTENT AREA ===== */
 .content {
-  flex-grow: 1;
-  background: rgba(0,0,0,0.5);
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;     /* ВАЖЛИВО */
-  border-radius: 10px;
-  color: white;
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
-  width: 70%;
-  scrollbar-width: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  height: 600px;
+  max-height: calc(100vh - 250px);
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
 }
 
 .content-section {
-  padding-bottom: 40px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.content-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .content-section h2 {
   margin-top: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 16px;
 }
 
-/* Застосувати стилі тільки до вмісту, що рендериться через innerHTML */
-.content .html-content {
-  /* необов'язково: шрифт, розмір, міжрядковий інтервал */
-  font-size: 15px;
-  line-height: 1.45;
-  color: inherit;
+.html-content {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-secondary);
 }
-/* Стилі для таблиць */
+
+.html-content h3 {
+  color: var(--text-primary);
+  font-size: 16px;
+  margin: 12px 0 8px 0;
+}
+
+.html-content p {
+  margin: 0 0 12px 0;
+}
+
+.html-content ul,
+.html-content ol {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.html-content li {
+  margin: 6px 0;
+}
+
+/* ===== TABLES ===== */
 .custom-table {
   width: 100%;
-  border-collapse: separate !important;
+  border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
-  border: 3px solid white !important; /* Збільшена товщина та !important */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.custom-table th {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(0, 78, 137, 0.15) 100%);
+  padding: 12px;
+  text-align: center;
+  color: var(--primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
 }
 
 .custom-table td {
-  border: 1px solid white !important; /* Збільшена товщина та !important */
-  padding: 8px;
+  border: 1px solid var(--border-color);
+  padding: 12px;
   text-align: center;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.3); /* Опціональний: легкий фон для клітинок для кращого контрасту */
+  color: var(--text-secondary);
+  background-color: transparent;
+  transition: background-color 0.2s ease;
 }
 
+.custom-table tbody tr:hover td {
+  background-color: var(--bg-hover);
+}
+
+/* ===== IMAGES ===== */
 .html-content img {
-  max-width: 100%; /* Автоматична адаптація */
+  max-width: 100%;
   height: auto;
-  display: block; /* Щоб уникнути зайвих відступів */
-  margin: 10px 0; /* Відступи зверху/знизу */
+  display: block;
+  margin: 16px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Мобільна адаптація */
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    gap: 16px;
+  }
+
+  .sidebar {
+    width: 240px;
+  }
+
+  .content {
+    padding: 24px;
+  }
+}
+
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
-    margin: 0; /* Повноекранність */
+    margin: 0;
     padding: 0;
-    min-height: auto; /* Росте за контентом */
+    gap: 0;
   }
 
-  /* Сайдбар як фіксоване горизонтальне меню зверху */
   .sidebar {
-    display: none !important;
+    width: 100%;
+    border-radius: 0;
+    height: auto;
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    gap: 0;
+    margin-bottom: 20px;
   }
 
+  .sidebar ul {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-  /* Контент з прокручуванням по сторінці */
+  .sidebar li {
+    border-bottom: 2px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .sidebar li:last-child {
+    border-bottom: 2px solid var(--border-color);
+    border-right: none;
+  }
+
+  .sidebar li.active {
+    border-bottom: 3px solid var(--primary);
+    border-left: none;
+    padding-left: 16px;
+  }
+
   .content {
     width: 100%;
-    height: auto; /* Без фіксованої висоти — росте за текстом */
-    min-height: calc(100vh - 200px); /* Запас для футера/навбар */
-    overflow-y: visible; /* Прокручування на body */
-    padding: 80px 15px 40px; /* Верхній відступ під сайдбар (≈60px висота сайдбару) */
-    margin-top: 0; /* Без додаткового маржину */
+    border-radius: 0;
+    padding: 16px;
+    min-height: auto;
+    margin-top: -1px;
   }
 
   .content-section {
     padding-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .html-content {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .html-content img {
-    max-width: 100%;
-    height: auto;
-    margin: 10px auto;
-    display: block;
-  }
-
-  /* Таблиці */
-  .custom-table {
     font-size: 13px;
-    overflow-x: auto;
-    display: block;
+  }
+
+  .custom-table {
+    font-size: 12px;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 10px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    min-height: auto;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .content-section {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .html-content {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .html-content h3 {
+    font-size: 14px;
+  }
+
+  .custom-table {
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 8px 4px;
   }
 }
 

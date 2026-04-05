@@ -1,89 +1,112 @@
 <div class="main-page">
-
-  <div class="title-container">
+  <!-- Hero Section -->
+  <div class="hero-section">
     <h1 class="name-main">L2-Absolute</h1>
     <h4 class="subname-main">{{ 'title' | translate }}</h4>
+    <p class="hero-subtitle">Professional Lineage 2 Gaming Experience</p>
   </div>
 
-  <div class="page-layout">
-
-    <!-- Ліва колонка -->
-    <aside class="side-column left-column">
-      <div class="sticky-wrapper">
-        <section class="side-panel">
-          <h3 class="side-title">{{ 'main_top_pvp_title' | translate }}</h3>
-          <div class="side-content">
-            <div class="top-item" *ngFor="let player of topPvp; let i = index">
-              {{ i + 1 }}. {{ player.characterName }} — {{ player.pvpKills }}
+  <!-- Main Content Grid -->
+  <div class="content-container">
+    <!-- Left Sidebar - Rankings -->
+    <aside class="sidebar sidebar-left">
+      <div class="sidebar-sticky">
+        <!-- Top PVP Players -->
+        <div class="ranking-card">
+          <div class="ranking-header">
+            <h3 class="ranking-title">⚔️ {{ 'main_top_pvp_title' | translate }}</h3>
+          </div>
+          <div class="ranking-list">
+            <div class="ranking-item" *ngFor="let player of topPvp; let i = index">
+              <span class="ranking-position" [class.top-3]="i < 3">{{ i + 1 }}</span>
+              <span class="ranking-name">{{ player.characterName }}</span>
+              <span class="ranking-value">{{ player.pvpKills }}</span>
             </div>
-            <div *ngIf="topPvp.length === 0" class="top-item">
+            <div *ngIf="topPvp.length === 0" class="ranking-empty">
               {{ 'main_loading' | translate }}
             </div>
           </div>
-        </section>
+        </div>
 
-        <section class="side-panel">
-          <h3 class="side-title">{{ 'main_top_pk_title' | translate }}</h3>
-          <div class="side-content">
-            <div class="top-item" *ngFor="let player of topPk; let i = index">
-              {{ i + 1 }}. {{ player.characterName }} — {{ player.pkKills }}
+        <!-- Top PK Players -->
+        <div class="ranking-card">
+          <div class="ranking-header">
+            <h3 class="ranking-title">🔥 {{ 'main_top_pk_title' | translate }}</h3>
+          </div>
+          <div class="ranking-list">
+            <div class="ranking-item" *ngFor="let player of topPk; let i = index">
+              <span class="ranking-position" [class.top-3]="i < 3">{{ i + 1 }}</span>
+              <span class="ranking-name">{{ player.characterName }}</span>
+              <span class="ranking-value">{{ player.pkKills }}</span>
             </div>
-            <div *ngIf="topPk.length === 0" class="top-item">
+            <div *ngIf="topPk.length === 0" class="ranking-empty">
               {{ 'main_loading' | translate }}
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </aside>
 
-    <!-- Центральна колонка -->
-    <main class="center-column">
-      <div class="sections-wrapper">
-        <section class="content-block">
-          <h2 class="block-title">{{ 'main_about_project_title' | translate }}</h2>
-          <div class="block-content">
-            <h3 [innerHTML]="'main_about_project_text' | translate"></h3>
-          </div>
-        </section>
+    <!-- Center Content -->
+    <main class="center-content">
+      <!-- Online Status Card -->
+      <div class="online-card">
+        <div class="online-icon">👥</div>
+        <div class="online-stats">
+          <span class="online-label">{{ 'main_online_label' | translate }}</span>
+          <span class="online-count">{{ online }}</span>
+          <span class="online-note">{{ 'main_online_note' | translate }}</span>
+        </div>
+      </div>
 
-        <section class="content-block">
-          <h2 class="block-title">{{ 'main_why_play_title' | translate }}</h2>
-          <div class="block-content">
-            <h3 [innerHTML]="'main_why_play_text' | translate"></h3>
-          </div>
-        </section>
+      <!-- Content Cards -->
+      <div class="info-card">
+        <div class="card-header">
+          <h2 class="card-title">ℹ️ {{ 'main_about_project_title' | translate }}</h2>
+        </div>
+        <div class="card-body">
+          <h3 [innerHTML]="'main_about_project_text' | translate"></h3>
+        </div>
+      </div>
 
-        <section class="content-block">
-          <h2 class="block-title">{{ 'main_features_title' | translate }}</h2>
-          <div class="block-content">
-            <h3 [innerHTML]="'main_features_text' | translate"></h3>
-          </div>
-        </section>
+      <div class="info-card">
+        <div class="card-header">
+          <h2 class="card-title">🎮 {{ 'main_why_play_title' | translate }}</h2>
+        </div>
+        <div class="card-body">
+          <h3 [innerHTML]="'main_why_play_text' | translate"></h3>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-header">
+          <h2 class="card-title">⭐ {{ 'main_features_title' | translate }}</h2>
+        </div>
+        <div class="card-body">
+          <h3 [innerHTML]="'main_features_text' | translate"></h3>
+        </div>
       </div>
     </main>
 
-    <!-- Права колонка -->
-    <aside class="side-column right-column">
-      <div class="sticky-wrapper">
-        <div class="online-box">
-          <div class="online-label">{{ 'main_online_label' | translate }}</div>
-          <div class="online-value">{{ online }}</div>
-          <div class="online-note">{{ 'main_online_note' | translate }}</div>
-        </div>
-
-        <section class="side-panel">
-          <h3 class="side-title">{{ 'main_top_clans_title' | translate }}</h3>
-          <div class="side-content">
-            <div class="top-item" *ngFor="let clan of topClans; let i = index">
-              {{ i + 1 }}. {{ clan.clanName }} — {{ clan.reputation | number }}
+    <!-- Right Sidebar - Top Clans -->
+    <aside class="sidebar sidebar-right">
+      <div class="sidebar-sticky">
+        <div class="ranking-card">
+          <div class="ranking-header">
+            <h3 class="ranking-title">👑 {{ 'main_top_clans_title' | translate }}</h3>
+          </div>
+          <div class="ranking-list">
+            <div class="ranking-item" *ngFor="let clan of topClans; let i = index">
+              <span class="ranking-position" [class.top-3]="i < 3">{{ i + 1 }}</span>
+              <span class="ranking-name">{{ clan.clanName }}</span>
+              <span class="ranking-value">{{ clan.reputation | number }}</span>
             </div>
-            <div *ngIf="topClans.length === 0" class="top-item">
+            <div *ngIf="topClans.length === 0" class="ranking-empty">
               {{ 'main_loading' | translate }}
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </aside>
-
   </div>
 </div>

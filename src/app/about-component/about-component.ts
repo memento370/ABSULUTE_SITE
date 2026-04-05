@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, PLATFORM_ID, ViewChild, ElementRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +15,11 @@ export class AboutComponent {
   currentLanguage = '';
   private langChangeSubscription?: Subscription;
   private isBrowser: boolean;
+  sections: { title: string; html: string }[] = [];
+  activeSection = 0;
+  private scrollTimeout: any;
+  private isScrolling = false;
+  private scrollListener: (() => void) | null = null;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -30,19 +35,97 @@ export class AboutComponent {
     this.langChangeSubscription = this.translate.onLangChange.subscribe((event) => {
       this.currentLanguage = event.lang;
       this.buildSections();
+      // Збільшити затримку перед переприкріпленням завдяки перебудові DOM
+      if (this.isBrowser) {
+        setTimeout(() => this.attachScrollListener(), 200);
+      }
     });
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isBrowser) {
+      // Прикріпити слухач після того як представлення ініціалізується
+      setTimeout(() => this.attachScrollListener(), 100);
+    }
+  }
+
+  ngAfterContentInit(): void {
+    if (this.isBrowser) {
+      setTimeout(() => this.attachScrollListener(), 150);
+    }
   }
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
+    if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+    
+    // Видалити слухач прокрутки
+    if (this.scrollListener) {
+      const content = document.querySelector('.content') as HTMLElement;
+      if (content) {
+        content.removeEventListener('scroll', this.scrollListener);
+      }
+    }
   }
 
   sanitize(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
-  sections: { title: string; html: string }[] = [];
-  activeSection = 0;
+  private attachScrollListener() {
+    const content = document.querySelector('.content') as HTMLElement;
+    if (!content) {
+      console.warn('Content element not found');
+      return;
+    }
+
+    // Видалити старий слухач якщо існує
+    if (this.scrollListener) {
+      content.removeEventListener('scroll', this.scrollListener);
+    }
+
+    // Прив'язати контекст та прикріпити новий слухач
+    this.scrollListener = this.onContentScroll.bind(this);
+    content.addEventListener('scroll', this.scrollListener);
+    console.log('Scroll listener attached');
+  }
+
+  private onContentScroll() {
+    // Завжди оновлювати активну вкладку під час прокрутки
+    this.updateActiveSection();
+  }
+
+  private updateActiveSection() {
+    if (!this.isBrowser) return;
+
+    const content = document.querySelector('.content') as HTMLElement | null;
+    if (!content) return;
+
+    const sections = Array.from(document.querySelectorAll('.content-section')) as HTMLElement[];
+    if (sections.length === 0) return;
+
+    const scrollTop = content.scrollTop;
+    const containerHeight = content.clientHeight;
+    const scrollCenter = scrollTop + containerHeight / 2;
+
+    // Знайти розділ, який найближче до центру видимої області
+    let activeIndex = 0;
+    let minDistance = Infinity;
+
+    sections.forEach((section, index) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      const sectionCenter = sectionTop + sectionHeight / 2;
+      const distance = Math.abs(sectionCenter - scrollCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        activeIndex = index;
+      }
+    });
+
+    this.activeSection = activeIndex;
+  }
 
   scrollToSection(index: number) {
     if (!this.isBrowser) return;
@@ -50,35 +133,25 @@ export class AboutComponent {
     const content = document.querySelector('.content') as HTMLElement | null;
     const target = document.getElementById('section-' + index);
 
-    if (!content || !target) return;
-
-    content.scrollTo({
-      top: target.offsetTop,
-      behavior: 'smooth'
-    });
-
-    this.activeSection = index;
-  }
-
-  onContentScroll() {
-    if (!this.isBrowser) return;
-
-    const container = document.querySelector('.content') as HTMLElement | null;
-    const sections = Array.from(document.querySelectorAll('.content-section')) as HTMLElement[];
-
-    if (!container || !sections.length) return;
-
-    const containerTop = container.scrollTop;
-
-    for (let i = 0; i < sections.length; i++) {
-      const sectionTop = sections[i].offsetTop;
-      const sectionHeight = sections[i].offsetHeight;
-
-      if (containerTop >= sectionTop - 20 && containerTop < sectionTop + sectionHeight - 20) {
-        this.activeSection = i;
-        break;
-      }
+    if (!content || !target) {
+      console.warn('Content or target not found for scroll');
+      return;
     }
+
+    this.isScrolling = true;
+    this.activeSection = index;
+
+    const targetTop = target.offsetTop;
+    const offsetValue = Math.max(0, targetTop - 60);
+
+    // Прокрутити до розділу
+    content.scrollTop = offsetValue;
+
+    if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+    // Окончить режим прокрутки після анімації
+    this.scrollTimeout = setTimeout(() => {
+      this.isScrolling = false;
+    }, 300);
   }
 
   

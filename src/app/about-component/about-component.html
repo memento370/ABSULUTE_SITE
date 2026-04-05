@@ -13,11 +13,10 @@
   </div>
 
   <!-- Правий блок з текстом -->
-  <div class="content" (scroll)="onContentScroll()">
+  <div class="content">
     <div *ngFor="let section of sections; let i = index"
         class="content-section"
         [attr.id]="'section-' + i">
-        <!-- <h2>{{ section.title }}</h2> -->
         <div class="html-content" [innerHTML]="section.html"></div>
     </div>
   </div>

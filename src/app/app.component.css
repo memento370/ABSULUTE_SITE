@@ -1,83 +1,54 @@
-
-  .language-panel {
-    z-index: 100;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    transition: height 0.3s ease; /* Анімація для плавного згортання */
-    height: 130px; /* Висота в розгорнутому стані (3 кнопки по 40px + 2 gaps по 5px) */
-  
-    &.collapsed {
-      height: 40px; /* Висота в згорнутому стані (1 кнопка) */
-    }
-  }
-  
-  .lang-btn {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    transition: background-color 0.3s;
-    background-size: cover; /* Зображення повністю вміщається в кнопку */
-    background-position: center; /* Центруємо зображення */
-    background-repeat: no-repeat; /* Без повторення */
-  
-    &:hover {
-      background-color: #bbb;
-    }
-  
-    &:active {
-      background-color: #999;
-    }
-  }
- 
-  
-/* Мовна панель на мобілці — завжди розгорнута в рядок, над навігацією */
-@media (max-width: 768px) {
-  .language-panel {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    flex-direction: row;    /* горизонтально */
-    gap: 10px;
-    height: auto;
-    z-index: 1200;          /* вище за навігацію */
-    transition: none;
-  }
-
-  /* Примусово показуємо всі 3 кнопки (ігноруємо collapsed) */
-  .language-panel.collapsed .lang-btn:not(:first-child),
-  .language-panel.collapsed button[ngClass] {
-    display: inline-block !important;
-  }
-
-  .language-panel .lang-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-
-  /* Трохи затемнюємо активну мову */
-  .language-panel .lang-btn:active {
-    transform: scale(0.92);
-  }
+/* ===== LANGUAGE PANEL IN NAVIGATION ===== */
+.language-panel-nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  order: 2;
+  margin-left: auto;
+  padding: 0 5px;
+  white-space: nowrap;
 }
 
-/* ===== Партнерська панель ===== */
+.language-panel-nav.collapsed {
+  gap: 8px;
+}
+
+.lang-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--bg-card);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.lang-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
+  border-color: var(--text-primary);
+}
+
+.lang-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== PARTNERS PANEL ===== */
 .partners-panel {
   width: 100%;
-  padding: 12px 20px;
+  padding: 16px 20px;
   box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(26, 31, 58, 0.9) 0%, rgba(10, 14, 39, 0.95) 100%);
+  border-bottom: 1px solid var(--border-color);
   position: relative;
   z-index: 50;
 }
@@ -85,33 +56,26 @@
 .partners-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 16px;
   align-items: center;
+  justify-content: center;
   max-width: 100%;
-  
-  /* Для горизонтального скролу на мобілці */
   overflow-x: auto;
-  
-  /* Скорочення для браузерів */
   -webkit-overflow-scrolling: touch;
-  
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 3px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-    
-    &:hover {
-      background: rgba(0, 0, 0, 0.3);
-    }
-  }
+  padding: 4px 0;
+}
+
+.partners-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.partners-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.partners-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
 }
 
 .partner-link {
@@ -119,61 +83,56 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  
-  /* Ховер ефект */
   transition: all 0.3s ease;
-  opacity: 0.9;
-  
-  &:hover {
-    opacity: 1;
-    transform: scale(1.05);
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
-  }
-  
-  &:active {
-    transform: scale(0.98);
-  }
-  
-  img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-  }
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Мобільна адаптація */
+.partner-link:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.25));
+}
+
+.partner-link:active {
+  transform: scale(0.95);
+}
+
+.partner-link img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
+  .language-panel-nav {
+    position: relative;
+    top: auto;
+    right: auto;
+    flex-direction: row;
+    gap: 8px;
+    z-index: auto;
+  }
+
+  .lang-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
   .partners-panel {
-    padding: 10px 12px;
+    padding: 12px 12px;
+    border-bottom: 1px solid var(--border-color);
   }
-  
+
   .partners-container {
-    gap: 10px;
+    gap: 12px;
+    padding: 0;
   }
-  
-  .partner-link {
-    &:hover {
-      transform: scale(1.03);
-    }
+
+  .partner-link:hover {
+    transform: scale(1.05);
   }
-}
-
-/* ===== FOOTER ===== */
-.app-footer {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 20px;
-  box-sizing: border-box;
-  color: #fff;
-  font-family: 'HombreRegular', Arial, sans-serif;
-  text-align: center;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-.app-footer p {
-  margin: 0;
-  line-height: 1.5;
 }
 

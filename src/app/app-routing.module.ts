@@ -7,12 +7,12 @@ import { FilesComponent } from './files-component/files-component';
 import { AboutComponent } from './about-component/about-component';
 
 const routes: Routes = [
+  { path: 'main', component: MainComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cabinet', component: CabinetComponent },
   { path: 'files', component: FilesComponent },
   { path: 'about', component: AboutComponent },
   { path: '', component: MainComponent },
-
 ];
 
 @NgModule({
