@@ -69,10 +69,10 @@ body {
 /* ===== MAIN HEADING STYLES ===== */
 @keyframes glowPulse {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(255, 107, 53, 0.5), 0 0 20px rgba(255, 107, 53, 0.3);
+    text-shadow: 0 0 8px rgba(77, 166, 255, 0.4), 0 0 16px rgba(77, 166, 255, 0.3);
   }
   50% {
-    text-shadow: 0 0 20px rgba(255, 107, 53, 0.8), 0 0 30px rgba(255, 107, 53, 0.6);
+    text-shadow: 0 0 18px rgba(77, 166, 255, 0.8), 0 0 28px rgba(77, 166, 255, 0.5);
   }
 }
 
@@ -83,7 +83,7 @@ body {
   margin-bottom: 0;
   margin-top: 0.3em;
   font-family: 'HombreRegular', sans-serif;
-  color: var(--primary);
+  color: #4da6ff;
   animation: glowPulse 3s ease-in-out infinite;
   letter-spacing: 2px;
 }
