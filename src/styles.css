@@ -16,6 +16,9 @@
   --danger: #ff4757;
   --warning: #3d8fe0;
 }
+.subname-main {
+  white-space: pre-line;
+}
 
 html, body {
   margin: 0;
